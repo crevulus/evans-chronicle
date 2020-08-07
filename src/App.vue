@@ -1,17 +1,18 @@
 <template>
-  <div id="app" class="small-container">
-    <h1>Employees</h1>
-    <EmployeeTable v-bind:employees="employees" />
+  <div id="app">
+    <NavBar />
   </div>
 </template>
 
 <script>
-import EmployeeTable from "./components/EmployeeTable";
+// import EmployeeTable from "./components/EmployeeTable";
+import NavBar from "./components/NavBar";
 
 export default {
   name: "App",
   components: {
-    EmployeeTable,
+    // EmployeeTable,
+    NavBar,
   },
   data() {
     return {
