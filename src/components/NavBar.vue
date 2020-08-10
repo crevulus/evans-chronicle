@@ -1,6 +1,9 @@
 <template>
   <div id="NavBar" class="NavBar">
-    <span v-for="member in family" v-bind:key="member" class="family-member">{{member}}</span>
+    <router-link to="/Maria">Maria</router-link>
+    <!-- <span v-for="member in family" v-bind:key="member" class="family-member">{{
+      member
+    }}</span> -->
   </div>
 </template>
 
@@ -17,6 +20,8 @@ export default {
 
 <style>
 .NavBar {
+  display: flex;
+  justify-content: space-evenly;
   width: 100%;
   margin: 0;
   background: black;
