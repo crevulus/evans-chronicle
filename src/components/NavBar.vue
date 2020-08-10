@@ -1,9 +1,16 @@
 <template>
   <div id="NavBar" class="NavBar">
-    <router-link to="/Maria">Maria</router-link>
+    <!-- <router-link to="/Maria">Maria</router-link> -->
     <!-- <span v-for="member in family" v-bind:key="member" class="family-member">{{
       member
     }}</span> -->
+    <span
+      v-for="member in family"
+      v-bind:key="member.name"
+      class="family-member"
+    >
+      <router-link :to="member.route">{{ member.name }}</router-link>
+    </span>
   </div>
 </template>
 
@@ -12,7 +19,24 @@ export default {
   name: "NavBar",
   data() {
     return {
-      family: ["Maria", "Paul", "Katie", "Christopher"],
+      family: [
+        {
+          name: "Maria",
+          route: "/Maria",
+        },
+        {
+          name: "Paul",
+          route: "/Paul",
+        },
+        {
+          name: "Katie",
+          route: "/Katie",
+        },
+        {
+          name: "Christopher",
+          route: "/Christopher",
+        },
+      ],
     };
   },
 };
