@@ -1,30 +1,38 @@
 <template>
-  <div id="app">
+  <v-app>
     <NavBar />
     <router-view />
-  </div>
+  </v-app>
 </template>
 
 <script>
-// import EmployeeTable from "./components/EmployeeTable";
 import NavBar from "./components/NavBar";
-
 export default {
   name: "App",
   components: {
-    // EmployeeTable,
     NavBar,
   },
+  data: () => ({
+    //
+  }),
 };
 </script>
 
 <style>
-button {
-  background: #009435;
-  border: 1px solid #009435;
+.cards-container {
+  width: 100%;
 }
 
-.small-container {
-  max-width: 680px;
+.card {
+  border: 1px solid black;
+  max-width: 70%;
+  margin: auto;
+  margin-bottom: 4em;
+}
+
+.card-img {
+  max-width: 100%;
+  display: block;
+  margin: auto;
 }
 </style>
