@@ -1,23 +1,19 @@
 <template>
   <div>
     <h2>Maria</h2>
-    <div v-for="img in images" :key="img.timestamp" class="cards-container">
-      <div class="card">
-        <img :src="img.source" alt="img.caption" class="card-img" />
-        <p>{{ moment(img.timestamp).format("MMM Do YY") }}</p>
-        <p>
-          {{ img.caption }}
-        </p>
-      </div>
-    </div>
+    <Cards v-bind:imageData="images" />
   </div>
 </template>
 <script>
 import arrow from "../assets/arrow.jpg";
 import big_door from "../assets/big_door.jpg";
+import Cards from "../components/Cards";
 
 export default {
   name: "Maria",
+  components: {
+    Cards,
+  },
   data() {
     return {
       images: [

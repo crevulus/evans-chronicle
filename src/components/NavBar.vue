@@ -44,13 +44,16 @@ export default {
 .NavBar {
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  height: 4em;
   width: 100%;
   margin: 0;
   background-color: purple;
-  text-align: center;
 }
 
 .link-text {
   color: white;
+  font-size: 1.3em;
 }
 </style>
