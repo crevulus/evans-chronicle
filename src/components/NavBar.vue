@@ -1,9 +1,5 @@
 <template>
-  <div id="NavBar" class="NavBar">
-    <!-- <router-link to="/Maria">Maria</router-link> -->
-    <!-- <span v-for="member in family" v-bind:key="member" class="family-member">{{
-      member
-    }}</span> -->
+  <md-toolbar class="md-primary NavBar">
     <span
       v-for="member in family"
       v-bind:key="member.name"
@@ -11,7 +7,7 @@
     >
       <router-link :to="member.route">{{ member.name }}</router-link>
     </span>
-  </div>
+  </md-toolbar>
 </template>
 
 <script>
@@ -48,8 +44,6 @@ export default {
   justify-content: space-evenly;
   width: 100%;
   margin: 0;
-  background: black;
-  color: white;
   text-align: center;
 }
 </style>
