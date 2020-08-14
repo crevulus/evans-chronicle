@@ -17,6 +17,7 @@ export default {
   name: "NavBar",
   data() {
     return {
+      documents: [],
       family: [
         {
           name: "Maria",
