@@ -35,7 +35,6 @@ mariaCollection.onSnapshot((mariaRef) => {
     instance.id = doc.id;
     data.push(instance);
   });
-  console.log("received: ", data);
   store.pictures = data;
   console.log(store.pictures);
 });

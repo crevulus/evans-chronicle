@@ -1,13 +1,11 @@
 <template>
   <div id="NavBar" class="NavBar">
-    <span
-      v-for="member in family"
-      v-bind:key="member.name"
-      class="family-member"
-    >
-      <router-link :to="member.route" class="link-text">{{
+    <span v-for="member in family" v-bind:key="member.name" class="family-member">
+      <router-link :to="member.route" class="link-text">
+        {{
         member.name
-      }}</router-link>
+        }}
+      </router-link>
     </span>
   </div>
 </template>
@@ -56,5 +54,9 @@ export default {
 .link-text {
   color: white;
   font-size: 1.3em;
+}
+
+.link-text.router-link-active {
+  color: green;
 }
 </style>

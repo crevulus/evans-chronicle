@@ -4,10 +4,8 @@
       <div class="card">
         <img :src="data.source" :alt="data.caption" class="card-img" />
         <div class="text-box">
-          <p>{{ moment(data.timestamp).format("MMM Do YYYY") }}</p>
-          <p>
-            {{ data.caption }}
-          </p>
+          <p>{{ moment(data.timestamp.toDate()).format("MMM Do YYYY") }}</p>
+          <p>{{ data.caption }}</p>
         </div>
       </div>
     </div>
@@ -18,7 +16,7 @@ export default {
   name: "Cards",
   props: {
     imageData: {
-      type: Object,
+      type: Array,
     },
   },
 };
