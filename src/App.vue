@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <NavBar />
-    <router-view />
+    <router-view class="content" />
   </div>
 </template>
 
@@ -19,6 +19,11 @@ export default {
 </script>
 
 <style>
+/* .title {
+  display: block;
+  margin-top: 3em;
+} */
+
 .card {
   max-width: 70%;
   margin: auto;

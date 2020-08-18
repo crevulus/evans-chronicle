@@ -33,7 +33,4 @@ export default {
 };
 </script>
 <style>
-.title {
-  /* margin-top: 50px; */
-}
 </style>

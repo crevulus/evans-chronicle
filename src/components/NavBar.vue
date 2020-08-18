@@ -39,27 +39,27 @@ export default {
   created() {
     this.hideShowNav();
   },
-  methods: {
-    hideShowNav: function () {
-      let prevScrollpos = window.pageYOffset;
-      window.onscroll = function () {
-        let currentScrollPos = window.pageYOffset;
-        if (prevScrollpos > currentScrollPos) {
-          document.getElementById("NavBar").classList.add("NavBar");
-          document.getElementById("NavBar").classList.remove("NavBar-hidden");
-        } else {
-          document.getElementById("NavBar").classList.add("NavBar-hidden");
-          document.getElementById("NavBar").classList.remove("NavBar");
-        }
-        prevScrollpos = currentScrollPos;
-      };
-    },
-  },
+  // methods: {
+  //   hideShowNav: function () {
+  //     let prevScrollpos = window.pageYOffset;
+  //     window.onscroll = function () {
+  //       let currentScrollPos = window.pageYOffset;
+  //       if (prevScrollpos > currentScrollPos) {
+  //         document.getElementById("NavBar").classList.add("NavBar");
+  //         document.getElementById("NavBar").classList.remove("NavBar-hidden");
+  //       } else {
+  //         document.getElementById("NavBar").classList.add("NavBar-hidden");
+  //         document.getElementById("NavBar").classList.remove("NavBar");
+  //       }
+  //       prevScrollpos = currentScrollPos;
+  //     };
+  //   },
+  // },
 };
 </script>
 
 <style>
-.NavBar {
+/* .NavBar {
   display: flex;
   position: fixed;
   justify-content: space-evenly;
@@ -67,7 +67,7 @@ export default {
   text-align: center;
   height: 4em;
   width: 100%;
-  margin-top: -1.5em;
+  margin-top: -6em;
   background-color: #7d36f0;
 }
 
@@ -80,6 +80,18 @@ export default {
   width: 100%;
   margin: 0;
   background-color: #7d36f0;
+} */
+
+.NavBar {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+  height: 4em;
+  background-color: #7d36f0;
+  text-align: center;
 }
 
 .link-text {
