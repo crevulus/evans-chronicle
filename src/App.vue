@@ -19,10 +19,6 @@ export default {
 </script>
 
 <style>
-.cards-container {
-  width: 100%;
-}
-
 .card {
   max-width: 70%;
   margin: auto;

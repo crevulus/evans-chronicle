@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Maria</h2>
+    <h2 class="title">Maria</h2>
     <Cards v-bind:imageData="images" />
   </div>
 </template>
@@ -32,4 +32,8 @@ export default {
   },
 };
 </script>
-<style></style>
+<style>
+.title {
+  /* margin-top: 50px; */
+}
+</style>
