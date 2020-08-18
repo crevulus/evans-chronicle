@@ -1,23 +1,19 @@
 <template>
   <div>
     <h2>Home</h2>
-    <div v-for="item of maria" v-bind:key="item['id']">
-      {{ item }}
-    </div>
+    <div v-for="item of pictures" v-bind:key="item.id">{{ item.caption }}</div>
   </div>
 </template>
 <script>
-import { mariaRef } from "../db";
+import { store } from "../db";
 
 export default {
   data() {
     return {
       test: "test",
       family: "",
+      pictures: store.pictures,
     };
-  },
-  firebase: {
-    maria: mariaRef,
   },
 };
 </script>

@@ -16,10 +16,28 @@ const firebaseConfig = {
   measurementId: "G-798MELJ620",
 };
 
-const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
-export const db = app.database();
-export const mariaRef = db.ref("Maria");
+const db = firebase.firestore();
+
+const mariaCollection = db.collection("Maria");
 
 const { Timestamp, GeoPoint } = firebase.firestore;
-export { Timestamp, GeoPoint };
+
+const store = {
+  pictures: null,
+};
+
+mariaCollection.onSnapshot((mariaRef) => {
+  const data = [];
+  mariaRef.forEach((doc) => {
+    const instance = doc.data();
+    instance.id = doc.id;
+    data.push(instance);
+  });
+  console.log("received: ", data);
+  store.pictures = data;
+  console.log(store.pictures);
+});
+
+export { mariaCollection, db, Timestamp, GeoPoint, store };
