@@ -28,15 +28,18 @@ const store = {
   pictures: null,
 };
 
-mariaCollection.onSnapshot((mariaRef) => {
-  const data = [];
-  mariaRef.forEach((doc) => {
-    const instance = doc.data();
-    instance.id = doc.id;
-    data.push(instance);
+async function getData() {
+  await mariaCollection.onSnapshot((mariaRef) => {
+    const data = [];
+    mariaRef.forEach((doc) => {
+      const instance = doc.data();
+      instance.id = doc.id;
+      data.push(instance);
+    });
+    store.pictures = data;
+    console.log("db " + store.pictures);
   });
-  store.pictures = data;
-  console.log(store.pictures);
-});
+  return store;
+}
 
-export { mariaCollection, db, Timestamp, GeoPoint, store };
+export { getData, mariaCollection, db, Timestamp, GeoPoint, store };

@@ -36,9 +36,6 @@ export default {
       ],
     };
   },
-  created() {
-    this.hideShowNav();
-  },
   // methods: {
   //   hideShowNav: function () {
   //     let prevScrollpos = window.pageYOffset;
