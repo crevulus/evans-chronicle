@@ -9,7 +9,7 @@
   </div>
 </template>
 <script>
-import { db, fb } from "../db";
+import { db, fb, Timestamp, GeoPoint } from "../db";
 import arrow from "../assets/arrow.jpg";
 import big_door from "../assets/big_door.jpg";
 import Cards from "../components/Cards";
@@ -54,12 +54,14 @@ export default {
         () => {
           uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
             console.log("File available at ", downloadURL);
-            db.collection("Maria").doc().set({
-              caption: "Test caption .set",
-              location: null,
-              source: downloadURL,
-              timestamp: Date.now(),
-            });
+            db.collection("Maria")
+              .doc()
+              .set({
+                caption: "Test caption .set",
+                source: downloadURL,
+                timestamp: Timestamp.now(),
+                location: new GeoPoint(52.3667, 4.8945),
+              });
           });
         }
       );

@@ -17,4 +17,6 @@ const fb = firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
-export { db, fb };
+const { Timestamp, GeoPoint } = firebase.firestore;
+
+export { db, fb, Timestamp, GeoPoint };
