@@ -36,7 +36,24 @@ export default {
     uploadImage(event) {
       let file = event.target.files[0];
       const storageRef = fb.storage().ref("Maria/" + file.name);
-      storageRef.put(file);
+      let uploadTask = storageRef.put(file);
+      uploadTask.on(
+        "state_changed",
+        () => {},
+        (error) => {
+          console.error(error);
+        },
+        () => {
+          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+            this.images.push({
+              source: downloadURL,
+              caption: "test caption",
+              timestamp: 1598357494247,
+            });
+            console.log("File available at ", downloadURL);
+          });
+        }
+      );
     },
   },
 };
