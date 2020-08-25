@@ -5,7 +5,7 @@
   </div>
 </template>
 <script>
-import { getData } from "../db";
+import { db } from "../db";
 import Cards from "../components/Cards";
 
 export default {
@@ -20,15 +20,27 @@ export default {
       dataLoaded: false,
     };
   },
-  created() {
-    getData()
-      .then((data) => JSON.stringify(data))
-      .then((d) => JSON.parse(d))
-      .then((item) => {
-        this.pictures = item.pictures;
-        this.dataLoaded = true;
+  // created() {
+  //   getData()
+  //     .then((data) => JSON.stringify(data))
+  //     .then((d) => JSON.parse(d))
+  //     .then((item) => {
+  //       this.pictures = item.pictures;
+  //       this.dataLoaded = true;
+  //     });
+  //   console.log("h");
+  // },
+  mounted() {
+    this.getEvents();
+  },
+  methods: {
+    async getEvents() {
+      // instead of using promises/thens
+      let snapshot = await db.collection("Maria").get();
+      snapshot.forEach((doc) => {
+        console.log(doc.data());
       });
-    console.log("h");
+    },
   },
 };
 </script>

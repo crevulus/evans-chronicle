@@ -1,7 +1,5 @@
 import firebase, { initializeApp } from "firebase/app";
 import "firebase/firestore";
-require("firebase/auth");
-require("firebase/database");
 
 // Get a Firestore instance
 
@@ -20,26 +18,28 @@ initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
-const mariaCollection = db.collection("Maria");
+// const mariaCollection = db.collection("Maria");
 
-const { Timestamp, GeoPoint } = firebase.firestore;
+// const { Timestamp, GeoPoint } = firebase.firestore;
 
-const store = {
-  pictures: null,
-};
+// const store = {
+//   pictures: null,
+// };
 
-async function getData() {
-  await mariaCollection.onSnapshot((mariaRef) => {
-    const data = [];
-    mariaRef.forEach((doc) => {
-      const instance = doc.data();
-      instance.id = doc.id;
-      data.push(instance);
-    });
-    store.pictures = data;
-    console.log("db " + store.pictures);
-  });
-  return store;
-}
+// async function getData() {
+//   await mariaCollection.onSnapshot((mariaRef) => {
+//     const data = [];
+//     mariaRef.forEach((doc) => {
+//       const instance = doc.data();
+//       instance.id = doc.id;
+//       data.push(instance);
+//     });
+//     store.pictures = data;
+//     console.log("db " + store.pictures);
+//   });
+//   return store;
+// }
 
-export { getData, mariaCollection, db, Timestamp, GeoPoint, store };
+// export { getData, mariaCollection, db, Timestamp, GeoPoint, store };
+
+export { db };
