@@ -1,10 +1,12 @@
 <template>
   <div>
     <h2 class="title">Maria</h2>
+    <input type="file" @change="uploadImage" />
     <Cards v-bind:imageData="images" />
   </div>
 </template>
 <script>
+import { fb } from "../db";
 import arrow from "../assets/arrow.jpg";
 import big_door from "../assets/big_door.jpg";
 import Cards from "../components/Cards";
@@ -29,6 +31,13 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    uploadImage(event) {
+      let file = event.target.files[0];
+      const storageRef = fb.storage().ref("Maria/" + file.name);
+      storageRef.put(file);
+    },
   },
 };
 </script>

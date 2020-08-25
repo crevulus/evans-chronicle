@@ -5,7 +5,7 @@
       <div v-for="picture in picturesData" :key="picture.id" class="card">
         <img :src="picture.source" :alt="picture.caption" class="card-img" />
         <div class="text-box">
-          <p>{{ moment(picture.timestamp).format("MMM Do YYYY") }}</p>
+          <p>{{ moment(picture.timestamp.toDate()).format("MMM Do YYYY") }}</p>
           <p>{{ picture.caption }}</p>
         </div>
       </div>
