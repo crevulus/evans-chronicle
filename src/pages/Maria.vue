@@ -1,7 +1,8 @@
 <template>
   <div>
     <h2 class="title">Maria</h2>
-    <form @submit="uploadImage">
+    <form @submit="uploadData">
+      <input type="text" @change="handleCaptionChange" />
       <input type="file" @change="handleImageChange" />
       <button type="submit">Submit</button>
     </form>
@@ -21,7 +22,8 @@ export default {
   },
   data() {
     return {
-      file: null,
+      uploadCaption: "",
+      uploadFile: null,
       images: [
         {
           source: arrow,
@@ -37,12 +39,15 @@ export default {
     };
   },
   methods: {
-    handleImageChange(event) {
-      this.file = event.target.files[0];
+    handleCaptionChange(event) {
+      this.uploadCaption = event.target.value;
     },
-    uploadImage(event) {
+    handleImageChange(event) {
+      this.uploadFile = event.target.files[0];
+    },
+    uploadData(event) {
       event.preventDefault();
-      let file = this.file;
+      let file = this.uploadFile;
       const storageRef = fb.storage().ref("Maria/" + file.name);
       let uploadTask = storageRef.put(file);
       uploadTask.on(
@@ -57,7 +62,7 @@ export default {
             db.collection("Maria")
               .doc()
               .set({
-                caption: "Test caption .set",
+                caption: this.uploadCaption,
                 source: downloadURL,
                 timestamp: Timestamp.now(),
                 location: new GeoPoint(52.3667, 4.8945),
@@ -65,7 +70,7 @@ export default {
           });
         }
       );
-      this.file = null;
+      this.uploadFile = null;
     },
   },
 };

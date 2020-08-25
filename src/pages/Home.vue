@@ -29,7 +29,11 @@ export default {
   methods: {
     async getEvents() {
       // instead of using promises/thens
-      let snapshot = await db.collection("Maria").limit(1).get();
+      let snapshot = await db
+        .collection("Maria")
+        .orderBy("timestamp", "desc")
+        .limit(1)
+        .get();
       let firstPicturesData;
       snapshot.forEach((doc) => {
         let appData = doc.data();
