@@ -29,6 +29,11 @@ export default {
       picturesData: [],
     };
   },
+  created() {
+    db.collection("Maria").onSnapshot((snapshot) => {
+      snapshot.forEach((doc) => console.log(doc.data()));
+    });
+  },
   mounted() {
     this.getImages();
   },
@@ -75,7 +80,6 @@ export default {
       snapshot.forEach((doc) => {
         let appData = doc.data();
         appData.id = doc.id;
-        console.log(doc.data());
         this.picturesData.push(appData);
       });
       this.dataLoaded = true;

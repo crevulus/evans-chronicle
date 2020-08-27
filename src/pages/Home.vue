@@ -20,13 +20,13 @@ export default {
     picturesData: [],
   }),
   mounted() {
-    this.getImages();
+    this.getImages("Maria");
   },
   methods: {
-    async getImages() {
+    async getImages(document) {
       // instead of using promises/thens
       let snapshot = await db
-        .collection("Maria")
+        .collection(document)
         .orderBy("timestamp", "desc")
         .limit(1)
         .get();
