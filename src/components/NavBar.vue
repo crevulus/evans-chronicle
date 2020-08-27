@@ -1,5 +1,9 @@
 <template>
   <div id="NavBar" class="NavBar">
+    <router-link to="/" exact>
+      <img src="../assets/evans.png" class="crest" />
+    </router-link>
+
     <span v-for="member in family" v-bind:key="member.name" class="family-member">
       <router-link :to="member.route" class="link-text">
         {{
@@ -104,5 +108,12 @@ export default {
 .link-text.router-link-active {
   text-decoration: none;
   color: #3abeaa;
+}
+
+.crest {
+  max-height: 4em;
+  max-width: 90%;
+  margin: auto;
+  float: left;
 }
 </style>
