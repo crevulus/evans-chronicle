@@ -17,10 +17,10 @@ const fb = firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
-const getHomeImages = async function getImages(document) {
+const getHomeImages = async function(collection) {
   // instead of using promises/thens
   let snapshot = await db
-    .collection(document)
+    .collection(collection)
     .orderBy("timestamp", "desc")
     .limit(1)
     .get();
@@ -33,6 +33,21 @@ const getHomeImages = async function getImages(document) {
   return firstPicturesData;
 };
 
+const getFamilyImages = async function(collection) {
+  // instead of using promises/thens
+  let picturesData = [];
+  let snapshot = await db
+    .collection(collection)
+    .orderBy("timestamp", "desc")
+    .get();
+  snapshot.forEach((doc) => {
+    let appData = doc.data();
+    appData.id = doc.id;
+    picturesData.push(appData);
+  });
+  return picturesData;
+};
+
 const { Timestamp, GeoPoint } = firebase.firestore;
 
-export { db, fb, Timestamp, GeoPoint, getHomeImages };
+export { db, fb, Timestamp, GeoPoint, getHomeImages, getFamilyImages };

@@ -2,7 +2,7 @@
   <div>
     <h2 class="title">Maria</h2>
     <form @submit="uploadData">
-      <input type="text" @change="handleCaptionChange" />
+      <input type="text" onfocus="this.value=''" @change="handleCaptionChange" />
       <input type="file" @change="handleImageChange" />
       <button type="submit">Submit</button>
     </form>
@@ -13,7 +13,7 @@
   </div>
 </template>
 <script>
-import { db, fb, Timestamp, GeoPoint } from "../db";
+import { db, fb, Timestamp, GeoPoint, getFamilyImages } from "../db";
 import Cards from "../components/Cards";
 
 export default {
@@ -30,7 +30,7 @@ export default {
     };
   },
   mounted() {
-    this.getImages();
+    this.renderImages("Maria");
     this.refreshImages();
   },
   methods: {
@@ -54,6 +54,7 @@ export default {
         () => {
           uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
             console.log("File available at ", downloadURL);
+            console.log(this.uploadCaption);
             db.collection("Maria")
               .doc()
               .set({
@@ -67,19 +68,25 @@ export default {
       );
       this.uploadFile = null;
     },
-    async getImages() {
-      // instead of using promises/thens
-      let picturesData = [];
-      let snapshot = await db
-        .collection("Maria")
-        .orderBy("timestamp", "desc")
-        .get();
-      snapshot.forEach((doc) => {
-        let appData = doc.data();
-        appData.id = doc.id;
-        picturesData.push(appData);
-      });
-      this.picturesData = picturesData;
+    // async getImages() {
+    //   // instead of using promises/thens
+    //   let picturesData = [];
+    //   let snapshot = await db
+    //     .collection("Maria")
+    //     .orderBy("timestamp", "desc")
+    //     .get();
+    //   snapshot.forEach((doc) => {
+    //     let appData = doc.data();
+    //     appData.id = doc.id;
+    //     picturesData.push(appData);
+    //   });
+    //   this.picturesData = picturesData;
+    //   this.dataLoaded = true;
+    // },
+    async renderImages(collection) {
+      await getFamilyImages(collection).then(
+        (data) => (this.picturesData = data)
+      );
       this.dataLoaded = true;
     },
     refreshImages() {
