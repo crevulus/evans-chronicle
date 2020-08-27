@@ -1,10 +1,7 @@
 <template>
   <div>
     <div class="title-container">
-      <h2 class="title">
-        Evans
-        <img src="../assets/evans.png" class="title-crest" /> Chronicle
-      </h2>
+      <h2 class="title">Evans Chronicle</h2>
     </div>
 
     <div v-if="this.dataLoaded" class="cards-container">
@@ -35,11 +32,13 @@ export default {
   mounted() {
     this.renderImages("Maria");
     this.renderImages("Paul");
-    this.dataLoaded = true;
   },
   methods: {
-    renderImages(collection) {
-      getHomeImages(collection).then((data) => this.picturesData.push([data]));
+    async renderImages(collection) {
+      await getHomeImages(collection).then((data) =>
+        this.picturesData.push([data])
+      );
+      this.dataLoaded = true;
     },
   },
 };

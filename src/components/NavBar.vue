@@ -91,7 +91,7 @@ export default {
   width: 100%;
   margin: 0;
   height: 4em;
-  background-color: #7d36f0;
+  background-color: #6154b3;
   text-align: center;
 }
 
@@ -102,12 +102,13 @@ export default {
 
 .link-text:hover {
   text-decoration: none;
-  color: #b1a8b9;
+  color: #e2c269;
 }
 
 .link-text.router-link-active {
   text-decoration: none;
-  color: #3abeaa;
+  text-shadow: 1px 1px #555;
+  color: #eeb825;
 }
 
 .crest {
