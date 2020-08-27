@@ -1,9 +1,11 @@
 <template>
   <div>
     <h2 class="title">Maria</h2>
+    <!-- <input type="button" @click="openModal" value="New Post" /> -->
+    <Modal />
     <form @submit="uploadData">
-      <input type="text" onfocus="this.value=''" @change="handleCaptionChange" />
-      <input type="file" @change="handleImageChange" />
+      <input type="text" @change="handleCaptionChange" :value="''" />
+      <input type="file" @change="handleImageChange" :value="null" />
       <button type="submit">Submit</button>
     </form>
     <div v-if="this.dataLoaded" class="cards-container">
@@ -15,14 +17,17 @@
 <script>
 import { db, fb, Timestamp, GeoPoint, getFamilyImages } from "../db";
 import Cards from "../components/Cards";
+import Modal from "../components/Modal";
 
 export default {
   name: "Maria",
   components: {
     Cards,
+    Modal,
   },
   data() {
     return {
+      modal: false,
       uploadCaption: "",
       uploadFile: null,
       dataLoaded: false,
@@ -63,10 +68,11 @@ export default {
                 timestamp: Timestamp.now(),
                 location: new GeoPoint(52.3667, 4.8945),
               });
+            this.uploadFile = null;
+            this.uploadCaption = null;
           });
         }
       );
-      this.uploadFile = null;
     },
     // async getImages() {
     //   // instead of using promises/thens
@@ -105,5 +111,4 @@ export default {
   },
 };
 </script>
-<style>
-</style>
+<style></style>
