@@ -69,6 +69,7 @@ export default {
     },
     async getImages() {
       // instead of using promises/thens
+      let picturesData = [];
       let snapshot = await db
         .collection("Maria")
         .orderBy("timestamp", "desc")
@@ -76,13 +77,13 @@ export default {
       snapshot.forEach((doc) => {
         let appData = doc.data();
         appData.id = doc.id;
-        this.picturesData.push(appData);
+        picturesData.push(appData);
       });
+      this.picturesData = picturesData;
       this.dataLoaded = true;
     },
-    async refreshImages() {
-      await db
-        .collection("Maria")
+    refreshImages() {
+      db.collection("Maria")
         .orderBy("timestamp", "desc")
         .onSnapshot((snapshot) => {
           let newPicturesData = [];
