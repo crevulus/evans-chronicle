@@ -17,6 +17,22 @@ const fb = firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
+const getHomeImages = async function getImages(document) {
+  // instead of using promises/thens
+  let snapshot = await db
+    .collection(document)
+    .orderBy("timestamp", "desc")
+    .limit(1)
+    .get();
+  let firstPicturesData;
+  snapshot.forEach((doc) => {
+    let appData = doc.data();
+    appData.id = doc.id;
+    firstPicturesData = appData;
+  });
+  return firstPicturesData;
+};
+
 const { Timestamp, GeoPoint } = firebase.firestore;
 
-export { db, fb, Timestamp, GeoPoint };
+export { db, fb, Timestamp, GeoPoint, getHomeImages };
