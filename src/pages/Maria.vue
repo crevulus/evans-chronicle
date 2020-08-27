@@ -29,13 +29,9 @@ export default {
       picturesData: [],
     };
   },
-  created() {
-    db.collection("Maria").onSnapshot((snapshot) => {
-      snapshot.forEach((doc) => console.log(doc.data()));
-    });
-  },
   mounted() {
     this.getImages();
+    this.refreshImages();
   },
   methods: {
     handleCaptionChange(event) {
@@ -83,6 +79,20 @@ export default {
         this.picturesData.push(appData);
       });
       this.dataLoaded = true;
+    },
+    async refreshImages() {
+      await db
+        .collection("Maria")
+        .orderBy("timestamp", "desc")
+        .onSnapshot((snapshot) => {
+          let newPicturesData = [];
+          snapshot.forEach((doc) => {
+            let newPictureData = doc.data();
+            newPictureData.id = doc.id;
+            newPicturesData.push(newPictureData);
+          });
+          this.picturesData = newPicturesData;
+        });
     },
   },
 };
