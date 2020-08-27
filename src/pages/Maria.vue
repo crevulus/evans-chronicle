@@ -6,13 +6,14 @@
       <input type="file" @change="handleImageChange" />
       <button type="submit">Submit</button>
     </form>
-    <Cards v-bind:imageData="images" />
+    <div v-if="this.dataLoaded" class="cards-container">
+      <Cards v-bind:imageData="picturesData" />
+    </div>
+    <h4 v-else>Loading...</h4>
   </div>
 </template>
 <script>
 import { db, fb, Timestamp, GeoPoint } from "../db";
-import arrow from "../assets/arrow.jpg";
-import big_door from "../assets/big_door.jpg";
 import Cards from "../components/Cards";
 
 export default {
@@ -24,19 +25,12 @@ export default {
     return {
       uploadCaption: "",
       uploadFile: null,
-      images: [
-        {
-          source: arrow,
-          caption: "This is a test caption for the arrow picture",
-          timestamp: 1597216974189,
-        },
-        {
-          source: big_door,
-          caption: "This is a test caption for the big door picture",
-          timestamp: 1597231561906,
-        },
-      ],
+      dataLoaded: false,
+      picturesData: [],
     };
+  },
+  mounted() {
+    this.getImages();
   },
   methods: {
     handleCaptionChange(event) {
@@ -71,6 +65,20 @@ export default {
         }
       );
       this.uploadFile = null;
+    },
+    async getImages() {
+      // instead of using promises/thens
+      let snapshot = await db
+        .collection("Maria")
+        .orderBy("timestamp", "desc")
+        .get();
+      snapshot.forEach((doc) => {
+        let appData = doc.data();
+        appData.id = doc.id;
+        console.log(doc.data());
+        this.picturesData.push(appData);
+      });
+      this.dataLoaded = true;
     },
   },
 };

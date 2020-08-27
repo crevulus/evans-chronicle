@@ -2,32 +2,28 @@
   <div>
     <h2>Home</h2>
     <div v-if="this.dataLoaded" class="cards-container">
-      <div v-for="picture in picturesData" :key="picture.id" class="card">
-        <img :src="picture.source" :alt="picture.caption" class="card-img" />
-        <div class="text-box">
-          <p>{{ moment(picture.timestamp.toDate()).format("MMM Do YYYY") }}</p>
-          <p>{{ picture.caption }}</p>
-        </div>
-      </div>
+      <Cards v-bind:imageData="picturesData" />
     </div>
+    <h4 v-else>Loading...</h4>
   </div>
 </template>
 <script>
 import { db } from "../db";
+import Cards from "../components/Cards";
 
 export default {
-  components: {},
+  components: {
+    Cards,
+  },
   data: () => ({
-    test: "test",
-    family: "",
-    dataLoaded: true,
+    dataLoaded: false,
     picturesData: [],
   }),
   mounted() {
-    this.getEvents();
+    this.getImages();
   },
   methods: {
-    async getEvents() {
+    async getImages() {
       // instead of using promises/thens
       let snapshot = await db
         .collection("Maria")
@@ -41,6 +37,7 @@ export default {
         firstPicturesData = appData;
       });
       this.picturesData.push(firstPicturesData);
+      this.dataLoaded = true;
     },
   },
 };
