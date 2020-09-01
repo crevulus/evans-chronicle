@@ -2,7 +2,8 @@
   <div>
     <h2 class="title">Maria</h2>
     <!-- <input type="button" @click="openModal" value="New Post" /> -->
-    <Modal />
+    <!-- <Modal /> -->
+    <div v-if="location">{{location.coords.latitude}}, {{location.coords.longitude}}</div>
     <form @submit="uploadData">
       <input type="text" @change="handleCaptionChange" :value="''" />
       <input type="file" @change="handleImageChange" :value="null" />
@@ -17,13 +18,13 @@
 <script>
 import { db, fb, Timestamp, GeoPoint, getFamilyImages } from "../db";
 import Cards from "../components/Cards";
-import Modal from "../components/Modal";
+// import Modal from "../components/Modal";
 
 export default {
   name: "Maria",
   components: {
     Cards,
-    Modal,
+    // Modal,
   },
   data() {
     return {
@@ -32,7 +33,18 @@ export default {
       uploadFile: null,
       dataLoaded: false,
       picturesData: [],
+      location: "",
     };
+  },
+  created() {
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        this.location = pos;
+      },
+      (err) => {
+        console.log(err.message);
+      }
+    );
   },
   mounted() {
     this.renderImages("Maria");
@@ -66,7 +78,10 @@ export default {
                 caption: this.uploadCaption,
                 source: downloadURL,
                 timestamp: Timestamp.now(),
-                location: new GeoPoint(52.3667, 4.8945),
+                location: new GeoPoint(
+                  this.location.coords.latitude,
+                  this.location.coords.longitude
+                ),
               });
             this.uploadFile = null;
             this.uploadCaption = null;
