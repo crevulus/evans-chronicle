@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div v-for="data in imageData" :key="data.id">
+    <div v-for="data in imageAnnotations" :key="data.id">
       <div class="card">
         <img :src="data.source" :alt="data.caption" class="card-img" />
         <div class="text-box">
           <p>{{ moment(data.timestamp.toDate()).format("MMM Do YYYY") }}</p>
           <p>{{ data.caption }}</p>
-          <p>{{ reverseGeocode(data.location.df, data.location.wf) }}</p>
+          <p>{{ data.decodedAddress }}</p>
         </div>
       </div>
     </div>
@@ -25,24 +25,23 @@ export default {
   data() {
     return {
       imageAnnotations: "",
-      decodedAddresses: [],
     };
   },
   created() {
-    this.reverseGeocode(40.714224, -73.961452).then((data) =>
-      console.log(data)
-    );
-  },
-  methods: {
-    async reverseGeocode(lat, long) {
-      await axios
+    this.imageAnnotations = this.imageData;
+    this.imageData.forEach((set, i) => {
+      axios
         .get(
-          `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${process.env.VUE_APP_GEOCODE_API_KEY}&result_type=locality`
+          `https://maps.googleapis.com/maps/api/geocode/json?latlng=${set.location.df},${set.location.wf}&key=${process.env.VUE_APP_GEOCODE_API_KEY}&result_type=locality`
         )
         .then((res) => {
+          console.log(res.data.results[0].formatted_address);
+          // this.decodedAddresses.push(res.data.results[0].formatted_address);
+          this.imageAnnotations[i].decodedAddress =
+            res.data.results[0].formatted_address;
           return res.data.results[0].formatted_address;
         });
-    },
+    });
   },
 };
 </script>
