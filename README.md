@@ -8,3 +8,4 @@
 - [] Upload form -> modal
 - [] Auth
 - [] Error handling
+- [] Hide API key
