@@ -6,13 +6,15 @@
         <div class="text-box">
           <p>{{ moment(data.timestamp.toDate()).format("MMM Do YYYY") }}</p>
           <p>{{ data.caption }}</p>
-          <p>{{reverseGeocode(data.location.df, data.location.wf)}}</p>
+          <p>{{ reverseGeocode(data.location.df, data.location.wf) }}</p>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import axios from "axios";
+
 export default {
   name: "Cards",
   props: {
@@ -20,17 +22,26 @@ export default {
       type: Array,
     },
   },
-  mounted() {},
+  data() {
+    return {
+      imageAnnotations: "",
+      decodedAddresses: [],
+    };
+  },
+  created() {
+    this.reverseGeocode(40.714224, -73.961452).then((data) =>
+      console.log(data)
+    );
+  },
   methods: {
-    reverseGeocode: (lat, long) => {
-      fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=AIzaSyBMB0WSdQOnDD5XSt2S41eV-4z2-IwzOQk&result_type=locality`
-      ).then((res) =>
-        res.json().then((data) => {
-          console.log(data.results[0].formatted_address);
-          return data.results[0].formatted_address;
-        })
-      );
+    async reverseGeocode(lat, long) {
+      await axios
+        .get(
+          `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${process.env.VUE_APP_GEOCODE_API_KEY}&result_type=locality`
+        )
+        .then((res) => {
+          return res.data.results[0].formatted_address;
+        });
     },
   },
 };
