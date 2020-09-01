@@ -6,7 +6,7 @@
         <div class="text-box">
           <p>{{ moment(data.timestamp.toDate()).format("MMM Do YYYY") }}</p>
           <p>{{ data.caption }}</p>
-          <p>{{ data.decodedAddress }}</p>
+          <p v-show="loaded">{{ data.decodedAddress }}</p>
         </div>
       </div>
     </div>
@@ -24,6 +24,7 @@ export default {
   },
   data() {
     return {
+      loaded: false,
       imageAnnotations: "",
     };
   },
@@ -36,12 +37,13 @@ export default {
         )
         .then((res) => {
           console.log(res.data.results[0].formatted_address);
-          // this.decodedAddresses.push(res.data.results[0].formatted_address);
+          // here
           this.imageAnnotations[i].decodedAddress =
             res.data.results[0].formatted_address;
           return res.data.results[0].formatted_address;
         });
     });
+    this.loaded = true;
   },
 };
 </script>
