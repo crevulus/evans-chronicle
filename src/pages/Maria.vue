@@ -1,9 +1,9 @@
 <template>
   <div>
     <h2 class="title">Maria</h2>
-    <!-- <input type="button" @click="openModal" value="New Post" /> -->
+    <button @click="toggleModal">Modal</button>
     <!-- <Modal /> -->
-    <div v-if="location">{{location.coords.latitude}}, {{location.coords.longitude}}</div>
+    <Modal v-if="modalOpen" />
     <form @submit="uploadData">
       <input type="text" @change="handleCaptionChange" :value="''" />
       <input type="file" @change="handleImageChange" :value="null" />
@@ -18,13 +18,13 @@
 <script>
 import { db, fb, Timestamp, GeoPoint, getFamilyImages } from "../db";
 import Cards from "../components/Cards";
-// import Modal from "../components/Modal";
+import Modal from "../components/Modal";
 
 export default {
   name: "Maria",
   components: {
     Cards,
-    // Modal,
+    Modal,
   },
   data() {
     return {
@@ -34,6 +34,7 @@ export default {
       dataLoaded: false,
       picturesData: [],
       location: "",
+      modalOpen: false,
     };
   },
   created() {
@@ -51,6 +52,9 @@ export default {
     this.refreshImages();
   },
   methods: {
+    toggleModal() {
+      this.modalOpen = !this.modalOpen;
+    },
     handleCaptionChange(event) {
       this.uploadCaption = event.target.value;
     },
