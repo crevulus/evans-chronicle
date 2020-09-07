@@ -1,18 +1,20 @@
 <template>
   <div>
     <h2 class="title">Maria</h2>
-    <button @click="toggleModal">Modal</button>
-    <!-- <Modal /> -->
     <Modal v-if="modalOpen" />
-    <form @submit="uploadData">
-      <input type="text" @change="handleCaptionChange" :value="''" />
-      <input type="file" @change="handleImageChange" :value="null" />
-      <button type="submit">Submit</button>
-    </form>
-    <div v-if="this.dataLoaded" class="cards-container">
-      <Cards v-bind:imageData="picturesData" />
+    <div :class="modalOpen ? 'modal-overlay' : ''">
+      <button @click="toggleModal">New Post</button>
+      <!-- <Modal /> -->
+      <form @submit="uploadData">
+        <input type="text" @change="handleCaptionChange" :value="''" />
+        <input type="file" @change="handleImageChange" :value="null" />
+        <button type="submit">Submit</button>
+      </form>
+      <div v-if="this.dataLoaded" class="cards-container">
+        <Cards v-bind:imageData="picturesData" />
+      </div>
+      <h4 v-else>Loading...</h4>
     </div>
-    <h4 v-else>Loading...</h4>
   </div>
 </template>
 <script>
@@ -130,4 +132,14 @@ export default {
   },
 };
 </script>
-<style></style>
+<style>
+.modal-overlay {
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-filter: blur(4px); /* Chrome, Safari, Opera */
+  filter: blur(4px);
+}
+</style>
