@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
+import Auth from "./pages/Auth";
 import Home from "./pages/Home";
 import Maria from "./pages/Maria";
 import Paul from "./pages/Paul";
@@ -10,6 +11,11 @@ Vue.use(Router);
 
 export default new Router({
   routes: [
+    {
+      path: "/auth",
+      name: "auth",
+      component: Auth,
+    },
     {
       path: "/",
       name: "home",

@@ -8,4 +8,4 @@
 - [x] Upload form -> dropdown
 - [] Auth
 - [] Error handling
-- [] Hide API key
+- [x] Hide API key
