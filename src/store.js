@@ -40,3 +40,5 @@ export default new Vuex.Store({
     },
   },
 });
+
+// reference article: https://blog.logrocket.com/vue-firebase-authentication/

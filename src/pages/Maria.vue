@@ -16,6 +16,7 @@
 </template>
 <script>
 import { db, fb, Timestamp, GeoPoint, getFamilyImages } from "../db";
+import { mapGetters } from "vuex";
 import Cards from "../components/Cards";
 
 export default {
@@ -90,21 +91,6 @@ export default {
         }
       );
     },
-    // async getImages() {
-    //   // instead of using promises/thens
-    //   let picturesData = [];
-    //   let snapshot = await db
-    //     .collection("Maria")
-    //     .orderBy("timestamp", "desc")
-    //     .get();
-    //   snapshot.forEach((doc) => {
-    //     let appData = doc.data();
-    //     appData.id = doc.id;
-    //     picturesData.push(appData);
-    //   });
-    //   this.picturesData = picturesData;
-    //   this.dataLoaded = true;
-    // },
     async renderImages(collection) {
       await getFamilyImages(collection).then(
         (data) => (this.picturesData = data)
@@ -124,6 +110,12 @@ export default {
           this.picturesData = newPicturesData;
         });
     },
+  },
+  computed: {
+    // store getters from store.js to local computed properties
+    ...mapGetters({
+      user: "user",
+    }),
   },
 };
 </script>
