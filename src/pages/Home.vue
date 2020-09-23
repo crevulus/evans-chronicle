@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="title-container">
-      <h2 class="title">Evans Chronicle</h2>
+      <h2 class="title">Evanstagram</h2>
     </div>
 
     <div v-if="this.dataLoaded" class="cards-container">

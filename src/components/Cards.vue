@@ -32,23 +32,6 @@ export default {
       imageAnnotations: "",
     };
   },
-  // created() {
-  //   this.imageAnnotations = this.imageData;
-  //   this.imageData.forEach((set, i) => {
-  //     axios
-  //       .get(
-  //         `https://maps.googleapis.com/maps/api/geocode/json?latlng=${set.location.df},${set.location.wf}&key=${process.env.VUE_APP_GEOCODE_API_KEY}&result_type=locality`
-  //       )
-  //       .then((res) => {
-  //         console.log(res.data.results[0].formatted_address);
-  //         // here
-  //         this.imageAnnotations[i].decodedAddress =
-  //           res.data.results[0].formatted_address;
-  //         return res.data.results[0].formatted_address;
-  //       });
-  //   });
-  //   this.loaded = true;
-  // },
 };
 </script>
 <style>

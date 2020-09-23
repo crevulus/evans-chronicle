@@ -1,32 +1,27 @@
 <template>
   <div>
     <h2 class="title">Maria</h2>
-    <Modal v-if="modalOpen" />
-    <div :class="modalOpen ? 'modal-overlay' : ''">
-      <button @click="toggleModal">New Post</button>
-      <!-- <Modal /> -->
-      <form @submit="uploadData">
-        <input type="text" @change="handleCaptionChange" :value="''" />
-        <input type="file" @change="handleImageChange" :value="null" />
-        <button type="submit">Submit</button>
-      </form>
-      <div v-if="this.dataLoaded" class="cards-container">
-        <Cards v-bind:imageData="picturesData" />
-      </div>
-      <h4 v-else>Loading...</h4>
+    <button @click="toggleModal">New Post</button>
+    <!-- <Modal /> -->
+    <form v-if="modalOpen" @submit="uploadData">
+      <input type="text" @change="handleCaptionChange" :value="''" />
+      <input type="file" @change="handleImageChange" :value="null" />
+      <button type="submit">Submit</button>
+    </form>
+    <div v-if="this.dataLoaded" class="cards-container">
+      <Cards v-bind:imageData="picturesData" />
     </div>
+    <h4 v-else>Loading...</h4>
   </div>
 </template>
 <script>
 import { db, fb, Timestamp, GeoPoint, getFamilyImages } from "../db";
 import Cards from "../components/Cards";
-import Modal from "../components/Modal";
 
 export default {
   name: "Maria",
   components: {
     Cards,
-    Modal,
   },
   data() {
     return {

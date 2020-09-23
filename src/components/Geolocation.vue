@@ -1,5 +1,5 @@
 <template>
-  <p>{{locationData}}</p>
+  <p>{{ locationData }}</p>
 </template>
 <script>
 export default {
@@ -16,7 +16,7 @@ export default {
   },
   created() {
     fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.address.df},${this.address.wf}&key=${process.env.VUE_APP_GEOCODE_API_KEY}&result_type=locality`
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.address.latitude},${this.address.longitude}&key=${process.env.VUE_APP_GEOCODE_API_KEY}&result_type=locality`
     ).then((res) => {
       res
         .json()

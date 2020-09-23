@@ -5,7 +5,7 @@
 - [] Retry vuetify
 - [x] Get GeoPoint data
 - [] Error handling & validation for upload form
-- [] Upload form -> modal
+- [x] Upload form -> dropdown
 - [] Auth
 - [] Error handling
 - [] Hide API key
