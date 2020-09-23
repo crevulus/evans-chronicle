@@ -2,6 +2,8 @@ import firebase from "firebase/app";
 import "firebase/storage";
 import "firebase/firestore";
 
+import store from "./store";
+
 const firebaseConfig = {
   apiKey: "AIzaSyBMB0WSdQOnDD5XSt2S41eV-4z2-IwzOQk",
   authDomain: "evans-chronicle.firebaseapp.com",
@@ -14,6 +16,10 @@ const firebaseConfig = {
 };
 
 const fb = firebase.initializeApp(firebaseConfig);
+
+firebase.auth().onAuthStateChanged((user) => {
+  store.dispatch("fetchUser", user);
+});
 
 const db = firebase.firestore();
 

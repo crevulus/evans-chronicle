@@ -2,6 +2,7 @@
   <div>
     <div>Login</div>
     <div v-if="error">{{ error }}</div>
+    <!-- prevent default refresh -->
     <form action="#" @submit.prevent="submit">
       <label for="email">Email</label>
       <input
