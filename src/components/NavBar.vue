@@ -1,6 +1,5 @@
 <template>
   <div id="NavBar" class="NavBar">
-    <a @click.prevent="signOut">Sign out</a>
     <router-link to="/" exact>
       <img src="../assets/evans.png" class="crest" />
     </router-link>
@@ -14,6 +13,9 @@
         {{ member.name }}
       </router-link>
     </span>
+    <button class="sign-out">
+      <a @click.prevent="signOut">Sign out</a>
+    </button>
   </div>
 </template>
 
@@ -61,6 +63,27 @@ export default {
 </script>
 
 <style>
+.sign-out {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  cursor: pointer;
+  background-color: #eeb825;
+  max-height: 50%;
+}
+
+.sign-out:hover {
+  background-color: #eeb825;
+  text-decoration: none;
+  border: none;
+  box-shadow: 3px 1px 4px #555;
+}
+
+.sign-out a {
+  color: white;
+  font-size: 14px;
+}
+
 .NavBar {
   display: flex;
   justify-content: space-evenly;

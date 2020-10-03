@@ -5,13 +5,21 @@
     </div>
 
     <div v-if="this.dataLoaded" class="cards-container">
-      <div>
-        <h4>Maria</h4>
+      <div class="person-card">
+        <h2>Maria</h2>
         <Cards v-bind:imageData="picturesData[0]" />
       </div>
-      <div>
-        <h4>Paul</h4>
+      <div class="person-card">
+        <h2>Paul</h2>
         <Cards v-bind:imageData="picturesData[1]" />
+      </div>
+      <div class="person-card">
+        <h2>Katie</h2>
+        <Cards v-bind:imageData="picturesData[2]" />
+      </div>
+      <div class="person-card">
+        <h2>Christopher</h2>
+        <Cards v-bind:imageData="picturesData[3]" />
       </div>
     </div>
     <h4 v-else>Loading...</h4>
@@ -32,6 +40,8 @@ export default {
   mounted() {
     this.renderImages("Maria");
     this.renderImages("Paul");
+    this.renderImages("Katie");
+    this.renderImages("Christopher");
   },
   methods: {
     async renderImages(collection) {
@@ -60,5 +70,16 @@ export default {
 
 .title-crest {
   max-height: 4.5rem;
+}
+
+h2 {
+  text-align: center;
+}
+
+@media screen and (min-width: 1000px) {
+  .cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
 }
 </style>

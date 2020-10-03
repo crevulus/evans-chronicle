@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 class="title">Maria</h2>
-    <button @click="toggleModal">New Post</button>
+    <button @click="toggleModal" class="new-post">New Post</button>
     <!-- <Modal /> -->
     <form v-if="modalOpen" @submit="uploadData">
       <input type="text" @change="handleCaptionChange" :value="''" />
@@ -128,5 +128,17 @@ export default {
   height: 100%;
   -webkit-filter: blur(4px); /* Chrome, Safari, Opera */
   filter: blur(4px);
+}
+
+.new-post {
+  background-color: #b03634;
+  color: white;
+}
+
+.new-post:hover {
+  background-color: #b03634;
+  text-decoration: none;
+  border: none;
+  box-shadow: 1px 1px 4px #999;
 }
 </style>

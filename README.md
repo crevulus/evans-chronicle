@@ -6,6 +6,6 @@
 - [x] Get GeoPoint data
 - [] Error handling & validation for upload form
 - [x] Upload form -> dropdown
-- [] Auth
-- [] Error handling
+- [x] Auth
+- [] Error handling (general)
 - [x] Hide API key
