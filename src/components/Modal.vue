@@ -2,9 +2,16 @@
   <div class="modal">
     <h2>Hol' up!</h2>
     <h4>Are you an Evans?</h4>
-    <div>If not: <button>Back</button></div>
-    <div>If so: Why aren'y you logged in yet?<button>Log in</button></div>
-    <button>Close</button>
+    <div>If not: <button v-on:click="$emit('close-modal')">Back</button></div>
+    <div>
+      If so: Why aren'y you logged in yet?
+      <router-link to="/auth"
+        ><button>
+          Log in
+        </button></router-link
+      >
+    </div>
+    <button v-on:click="$emit('close-modal')">Close</button>
   </div>
 </template>
 

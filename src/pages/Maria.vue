@@ -1,9 +1,9 @@
 <template>
   <div>
-    <Modal v-if="modalOpen" />
+    <Modal v-if="modalOpen" v-on:close-modal="toggleModal" />
     <div v-bind:class="{ 'modal-overlay': modalOpen }">
       <h2 class="title">Maria</h2>
-      <button @click="toggleModal" class="new-post">New Post</button>
+      <button @click="newPostButton" class="new-post">New Post</button>
       <form v-if="newPostOpen" @submit="uploadData">
         <input type="text" @change="handleCaptionChange" :value="''" />
         <input type="file" @change="handleImageChange" :value="null" />
@@ -54,6 +54,13 @@ export default {
     this.refreshImages();
   },
   methods: {
+    newPostButton() {
+      if (this.user.loggedIn === false) {
+        this.toggleModal();
+      } else {
+        this.toggleNewPost();
+      }
+    },
     toggleNewPost() {
       this.newPostOpen = !this.newPostOpen;
     },
@@ -104,8 +111,8 @@ export default {
       );
       this.dataLoaded = true;
     },
-    refreshImages(name) {
-      db.collection(name)
+    refreshImages() {
+      db.collection("Maria") // replacing this with name param seems to break it
         .orderBy("timestamp", "desc")
         .onSnapshot((snapshot) => {
           let newPicturesData = [];

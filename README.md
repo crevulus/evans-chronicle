@@ -9,3 +9,4 @@
 - [x] Auth
 - [] Error handling (general)
 - [x] Hide API key
+- [] Find out why can't pass name param for refreshImages fn
