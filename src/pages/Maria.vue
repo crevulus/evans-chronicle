@@ -9,7 +9,7 @@
         <input type="file" @change="handleImageChange" :value="null" />
         <button type="submit">Submit</button>
       </form>
-      <div v-if="this.dataLoaded" class="cards-container">
+      <div v-if="this.dataLoaded">
         <Cards v-bind:imageData="picturesData" />
       </div>
       <h4 v-else>Loading...</h4>

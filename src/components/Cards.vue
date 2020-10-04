@@ -1,5 +1,5 @@
 <template>
-  <div class="cards-container-card">
+  <div v-bind:class="{ 'cards-container-not-home': notHome }">
     <div v-for="data in imageData" :key="data.id">
       <div class="card">
         <img :src="data.source" :alt="data.caption" class="card-img" />
@@ -32,6 +32,11 @@ export default {
       imageAnnotations: "",
     };
   },
+  computed: {
+    notHome() {
+      return this.$route.path !== "/";
+    },
+  },
 };
 </script>
 <style>
@@ -55,7 +60,7 @@ export default {
 }
 
 @media screen and (min-width: 1000px) {
-  .cards-container-card {
+  .cards-container-not-home {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
