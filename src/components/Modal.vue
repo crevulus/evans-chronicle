@@ -1,11 +1,10 @@
 <template>
   <div class="modal">
-    <div>Upload a new post</div>
-    <form @submit="uploadData">
-      <input type="text" @change="handleCaptionChange" :value="''" />
-      <input type="file" @change="handleImageChange" :value="null" />
-      <button type="submit">Submit</button>
-    </form>
+    <h2>Hol' up!</h2>
+    <h4>Are you an Evans?</h4>
+    <div>If not: <button>Back</button></div>
+    <div>If so: Why aren'y you logged in yet?<button>Log in</button></div>
+    <button>Close</button>
   </div>
 </template>
 

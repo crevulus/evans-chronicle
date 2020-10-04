@@ -1,37 +1,41 @@
 <template>
   <div>
-    <h2 class="title">Maria</h2>
-    <button @click="toggleModal" class="new-post">New Post</button>
-    <!-- <Modal /> -->
-    <form v-if="modalOpen" @submit="uploadData">
-      <input type="text" @change="handleCaptionChange" :value="''" />
-      <input type="file" @change="handleImageChange" :value="null" />
-      <button type="submit">Submit</button>
-    </form>
-    <div v-if="this.dataLoaded" class="cards-container">
-      <Cards v-bind:imageData="picturesData" />
+    <Modal v-if="modalOpen" />
+    <div v-bind:class="{ 'modal-overlay': modalOpen }">
+      <h2 class="title">Maria</h2>
+      <button @click="toggleModal" class="new-post">New Post</button>
+      <form v-if="newPostOpen" @submit="uploadData">
+        <input type="text" @change="handleCaptionChange" :value="''" />
+        <input type="file" @change="handleImageChange" :value="null" />
+        <button type="submit">Submit</button>
+      </form>
+      <div v-if="this.dataLoaded" class="cards-container">
+        <Cards v-bind:imageData="picturesData" />
+      </div>
+      <h4 v-else>Loading...</h4>
     </div>
-    <h4 v-else>Loading...</h4>
   </div>
 </template>
 <script>
 import { db, fb, Timestamp, GeoPoint, getFamilyImages } from "../db";
 import { mapGetters } from "vuex";
 import Cards from "../components/Cards";
+import Modal from "../components/Modal";
 
 export default {
   name: "Maria",
   components: {
     Cards,
+    Modal,
   },
   data() {
     return {
-      modal: false,
       uploadCaption: "",
       uploadFile: null,
       dataLoaded: false,
       picturesData: [],
       location: "",
+      newPostOpen: false,
       modalOpen: false,
     };
   },
@@ -50,6 +54,9 @@ export default {
     this.refreshImages();
   },
   methods: {
+    toggleNewPost() {
+      this.newPostOpen = !this.newPostOpen;
+    },
     toggleModal() {
       this.modalOpen = !this.modalOpen;
     },
@@ -97,8 +104,8 @@ export default {
       );
       this.dataLoaded = true;
     },
-    refreshImages() {
-      db.collection("Maria")
+    refreshImages(name) {
+      db.collection(name)
         .orderBy("timestamp", "desc")
         .onSnapshot((snapshot) => {
           let newPicturesData = [];

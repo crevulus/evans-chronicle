@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="cards-container-card">
     <div v-for="data in imageData" :key="data.id">
       <div class="card">
         <img :src="data.source" :alt="data.caption" class="card-img" />
@@ -52,5 +52,12 @@ export default {
   max-width: 100%;
   display: block;
   margin: auto;
+}
+
+@media screen and (min-width: 1000px) {
+  .cards-container-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }
 </style>
