@@ -2,7 +2,7 @@
 
 ## To Do
 
-- [] Retry vue-material
+- [x] Retry vue-material
 - [x] Get GeoPoint data
 - [] Error handling & validation for upload form
 - [x] Upload form -> dropdown

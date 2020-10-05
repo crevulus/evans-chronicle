@@ -29,7 +29,10 @@ const getHomeImages = async function(collection) {
     .collection(collection)
     .orderBy("timestamp", "desc")
     .limit(1)
-    .get();
+    .get()
+    .catch((error) => {
+      console.error("Error retrieving home images: ", error);
+    });
   let firstPicturesData;
   snapshot.forEach((doc) => {
     let appData = doc.data();
@@ -45,7 +48,10 @@ const getFamilyImages = async function(collection) {
   let snapshot = await db
     .collection(collection)
     .orderBy("timestamp", "desc")
-    .get();
+    .get()
+    .catch((error) => {
+      console.error("Error retrieving family images: ", error);
+    });
   snapshot.forEach((doc) => {
     let appData = doc.data();
     appData.id = doc.id;
@@ -58,7 +64,10 @@ const deletePost = async function(name, doc) {
   db.collection(name)
     .doc(doc)
     .delete()
-    .then(() => console.log(`deleted ${name}, ${doc}`));
+    .then(() => console.log(`deleted ${name}, ${doc}`))
+    .catch((error) => {
+      console.error("Error removing document: ", error);
+    });
 };
 
 const { Timestamp, GeoPoint } = firebase.firestore;

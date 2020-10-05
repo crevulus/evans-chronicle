@@ -129,6 +129,9 @@ export default {
             newPicturesData.push(newPictureData);
           });
           this.picturesData = newPicturesData;
+        })
+        .catch((error) => {
+          console.error("Error refreshing images: ", error);
         });
     },
     deleteImage(doc) {

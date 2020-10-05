@@ -14,7 +14,7 @@
       </router-link>
     </span>
     <button v-if="user.loggedIn" class="auth-btn">
-      <a @click.prevent="signOut">Sign out</a>
+      <a @click.prevent="signOut" class="auth-btn-text">Sign out</a>
     </button>
     <button v-else class="auth-btn">
       <router-link to="/auth">Sign in</router-link>
@@ -88,14 +88,18 @@ button {
 
 .auth-btn:hover {
   background-color: #eeb825;
-  text-decoration: none !important;
   border: none;
   box-shadow: 5px 3px 4px #555;
 }
 
-.auth-btn a {
-  color: white !important;
+.auth-btn-text {
+  color: white;
   font-size: 14px;
+}
+
+.auth-btn-text:hover {
+  text-decoration: none !important;
+  color: white;
 }
 
 .NavBar {
@@ -111,12 +115,12 @@ button {
 }
 
 .link-text {
-  color: white !important;
+  color: white;
   font-size: 1.3em;
 }
 
 .link-text:hover {
-  text-decoration: none;
+  text-decoration: none !important;
   color: #e2c269;
 }
 
