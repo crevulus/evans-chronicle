@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div>Login</div>
+    <h3>Evans Login</h3>
+    <p>Forgot your password? Text me, I guess. This ain't facebook.</p>
     <div v-if="error">{{ error }}</div>
     <!-- prevent default refresh -->
     <form action="#" @submit.prevent="submit">

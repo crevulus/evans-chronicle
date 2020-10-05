@@ -17,7 +17,7 @@
       <a @click.prevent="signOut" class="auth-btn-text">Sign out</a>
     </button>
     <button v-else class="auth-btn">
-      <router-link to="/auth">Sign in</router-link>
+      <router-link class="auth-btn-text" to="/auth">Sign in</router-link>
     </button>
   </div>
 </template>
@@ -87,6 +87,12 @@ button {
 }
 
 .auth-btn:hover {
+  background-color: #d8a822;
+  border: none;
+  box-shadow: 5px 3px 4px #555;
+}
+
+.auth-btn:focus {
   background-color: #eeb825;
   border: none;
   box-shadow: 5px 3px 4px #555;
@@ -98,6 +104,11 @@ button {
 }
 
 .auth-btn-text:hover {
+  text-decoration: none !important;
+  color: white;
+}
+
+.auth-btn-text:focus {
   text-decoration: none !important;
   color: white;
 }

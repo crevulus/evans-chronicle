@@ -2,10 +2,24 @@
   <div>
     <Modal v-if="modalOpen" @close-modal="toggleModal" />
     <div :class="{ 'modal-overlay': modalOpen }">
-      <h2 class="title">Maria</h2>
-      <button @click="newPostButton" class="new-post">New Post</button>
-      <form v-if="newPostOpen" @submit="uploadData">
-        <input type="text" @change="handleCaptionChange" :value="''" />
+      <div class="heading">
+        <h2 class="title">Maria</h2>
+        <button
+          v-if="user.loggedIn"
+          @click="newPostButton"
+          class="new-post-btn"
+        >
+          New Post
+        </button>
+      </div>
+      <form v-if="newPostOpen" @submit="uploadData" class="new-post-container">
+        <input
+          type="text"
+          @change="handleCaptionChange"
+          :value="''"
+          placeholder="Type your caption here..."
+          class="new-post-text-input"
+        />
         <input type="file" @change="handleImageChange" :value="null" />
         <button type="submit">Submit</button>
       </form>
@@ -157,15 +171,41 @@ export default {
   filter: blur(4px);
 }
 
-.new-post {
+.heading {
+  display: grid;
+  grid-template-columns: 80% 20%;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.new-post-btn {
+  float: right;
   background-color: #b03634;
+  max-height: 3rem;
   color: white;
 }
 
-.new-post:hover {
-  background-color: #b03634;
+.new-post-btn:hover {
+  background-color: #a33432;
   text-decoration: none;
   border: none;
   box-shadow: 1px 1px 4px #999;
+}
+
+.new-post-btn:focus {
+  background-color: #b03634;
+  border: none;
+}
+
+.new-post-container {
+  background-color: rgb(202, 200, 200);
+  margin: 5px 10px 20px 10px;
+  padding: 5px;
+  border: 1px solid #999;
+  border-radius: 5px;
+}
+
+.new-post-text-input {
+  background-color: white;
 }
 </style>
