@@ -13,14 +13,18 @@
         {{ member.name }}
       </router-link>
     </span>
-    <button class="sign-out">
+    <button v-if="user.loggedIn" class="auth-btn">
       <a @click.prevent="signOut">Sign out</a>
+    </button>
+    <button v-else class="auth-btn">
+      <router-link to="/auth">Sign in</router-link>
     </button>
   </div>
 </template>
 
 <script>
 import firebase from "firebase";
+import { mapGetters } from "vuex";
 
 export default {
   name: "NavBar",
@@ -59,11 +63,17 @@ export default {
         });
     },
   },
+  computed: {
+    // store getters from store.js to local computed properties
+    ...mapGetters({
+      user: "user",
+    }),
+  },
 };
 </script>
 
 <style>
-.sign-out {
+.auth-btn {
   display: flex;
   align-items: center;
   margin: 0;
@@ -72,14 +82,14 @@ export default {
   max-height: 50%;
 }
 
-.sign-out:hover {
+.auth-btn:hover {
   background-color: #eeb825;
   text-decoration: none;
   border: none;
   box-shadow: 3px 1px 4px #555;
 }
 
-.sign-out a {
+.auth-btn a {
   color: white;
   font-size: 14px;
 }

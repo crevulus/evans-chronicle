@@ -5,6 +5,7 @@
         <img :src="data.source" :alt="data.caption" class="card-img" />
         <div class="text-box">
           <p>{{ moment(data.timestamp.toDate()).format("MMM Do YYYY") }}</p>
+          <button @click="$emit('delete-post', data.id)">Delete</button>
           <p>{{ data.caption }}</p>
           <Geolocation v-bind:address="data.location" />
         </div>
@@ -25,6 +26,9 @@ export default {
     imageData: {
       type: Array,
     },
+    deleteImage: {
+      type: Function,
+    },
   },
   data() {
     return {
@@ -41,7 +45,7 @@ export default {
 </script>
 <style>
 .card {
-  max-width: 70%;
+  max-width: 80%;
   margin: auto;
   margin-bottom: 4em;
   border: 1px solid #555;

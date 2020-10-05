@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Modal v-if="modalOpen" v-on:close-modal="toggleModal" />
-    <div v-bind:class="{ 'modal-overlay': modalOpen }">
+    <Modal v-if="modalOpen" @close-modal="toggleModal" />
+    <div :class="{ 'modal-overlay': modalOpen }">
       <h2 class="title">Maria</h2>
       <button @click="newPostButton" class="new-post">New Post</button>
       <form v-if="newPostOpen" @submit="uploadData">
@@ -10,7 +10,7 @@
         <button type="submit">Submit</button>
       </form>
       <div v-if="this.dataLoaded">
-        <Cards v-bind:imageData="picturesData" />
+        <Cards :imageData="picturesData" @delete-post="deleteImage" />
       </div>
       <h4 v-else>Loading...</h4>
     </div>
@@ -123,6 +123,9 @@ export default {
           });
           this.picturesData = newPicturesData;
         });
+    },
+    deleteImage(id) {
+      alert(`delete post: ${id}`);
     },
   },
   computed: {
