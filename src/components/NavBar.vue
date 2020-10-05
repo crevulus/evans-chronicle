@@ -89,13 +89,18 @@ button {
 .auth-btn:hover {
   background-color: #d8a822;
   border: none;
-  box-shadow: 5px 3px 4px #555;
+  box-shadow: 2px 2px 4px #555;
 }
 
 .auth-btn:focus {
   background-color: #eeb825;
   border: none;
-  box-shadow: 5px 3px 4px #555;
+  box-shadow: 2px 2px 4px #555;
+}
+
+.auth-btn:active {
+  box-shadow: 2px 0.5px 5px #555;
+  transform: translateY(1px);
 }
 
 .auth-btn-text {

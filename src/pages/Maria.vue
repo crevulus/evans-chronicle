@@ -21,7 +21,7 @@
           class="new-post-text-input"
         />
         <input type="file" @change="handleImageChange" :value="null" />
-        <button type="submit">Submit</button>
+        <button type="submit" class="submit">Submit</button>
       </form>
       <div v-if="this.dataLoaded">
         <Cards :imageData="picturesData" @delete-post="deleteImage" />
@@ -95,36 +95,41 @@ export default {
       this.uploadFile = event.target.files[0];
     },
     uploadData(event) {
-      event.preventDefault();
-      let file = this.uploadFile;
-      const storageRef = fb.storage().ref("Maria/" + file.name);
-      let uploadTask = storageRef.put(file);
-      uploadTask.on(
-        "state_changed",
-        () => {},
-        (error) => {
-          console.error(error);
-        },
-        () => {
-          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-            console.log("File available at ", downloadURL);
-            console.log(this.uploadCaption);
-            db.collection("Maria")
-              .doc()
-              .set({
-                caption: this.uploadCaption,
-                source: downloadURL,
-                timestamp: Timestamp.now(),
-                location: new GeoPoint(
-                  this.location.coords.latitude,
-                  this.location.coords.longitude
-                ),
-              });
-            this.uploadFile = null;
-            this.uploadCaption = null;
-          });
-        }
-      );
+      if (this.uploadCaption !== null && this.uploadFile !== null) {
+        event.preventDefault();
+        let file = this.uploadFile;
+        const storageRef = fb.storage().ref("Maria/" + file.name);
+        let uploadTask = storageRef.put(file);
+        uploadTask.on(
+          "state_changed",
+          () => {},
+          (error) => {
+            console.error(error);
+          },
+          () => {
+            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+              console.log("File available at ", downloadURL);
+              console.log(this.uploadCaption);
+              db.collection("Maria")
+                .doc()
+                .set({
+                  caption: this.uploadCaption,
+                  source: downloadURL,
+                  timestamp: Timestamp.now(),
+                  location: new GeoPoint(
+                    this.location.coords.latitude,
+                    this.location.coords.longitude
+                  ),
+                });
+              this.uploadFile = null;
+              this.uploadCaption = null;
+            });
+          }
+        );
+      } else {
+        event.preventDefault();
+        alert("Please upload a valid image file with a valid caption.");
+      }
     },
     async renderImages(collection) {
       await getFamilyImages(collection).then(
@@ -186,12 +191,18 @@ export default {
   background-color: #a33432;
   text-decoration: none;
   border: none;
-  box-shadow: 1px 1px 4px #999;
+  box-shadow: 2px 1px 4px #999;
 }
 
 .new-post-btn:focus {
   background-color: #b03634;
   border: none;
+}
+
+.new-post-btn:active {
+  box-shadow: 0.5px 0.5px 4px #555;
+  box-shadow: 2px 0.5px 5px #555;
+  transform: translateY(1px);
 }
 
 .new-post-container {

@@ -18,10 +18,12 @@
             </button>
             <div v-if="showDeleteWarning" class="delete-warning">
               <p>Are you sure you want to delete this post?</p>
-              <button @click="$emit('delete-post', data.id)">Yes</button
-              ><button @click="toggleDelete">No</button>
+              <button @click="$emit('delete-post', data.id)" class="submit">
+                Yes</button
+              ><button @click="toggleDelete" class="submit">No</button>
             </div>
           </div>
+
           <div>
             <p>
               <md-icon class="card-icon">speaker_notes</md-icon
@@ -123,11 +125,17 @@ export default {
   border: none;
 }
 
+.delete-btn:active {
+  box-shadow: 2px 0.5px 5px #555;
+  transform: translateY(1px);
+}
+
 .delete-warning {
+  float: right;
+  background-color: white;
   border: 1px solid grey;
   border-radius: 5px;
-  z-index: 10;
-  float: right;
+  z-index: 10 !important;
 }
 
 @media screen and (min-width: 1000px) {

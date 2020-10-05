@@ -11,3 +11,5 @@
 - [x] Hide API key
 - [] Find out why can't pass name param for refreshImages fn
 - [] UX feedback for submitting a new post
+- [] Up/down icon for new post
+- [] Mobile design

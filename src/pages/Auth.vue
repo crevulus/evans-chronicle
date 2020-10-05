@@ -1,8 +1,11 @@
 <template>
-  <div>
+  <div class="auth-container">
     <h3>Evans Login</h3>
-    <p>Forgot your password? Text me, I guess. This ain't facebook.</p>
-    <div v-if="error">{{ error }}</div>
+    <p>
+      <strong>Forgot your password?</strong> Text me, I guess. This ain't
+      Google.
+    </p>
+    <div v-if="error" class="error">{{ error }}</div>
     <!-- prevent default refresh -->
     <form action="#" @submit.prevent="submit">
       <label for="email">Email</label>
@@ -23,7 +26,7 @@
         required
         v-model="form.password"
       />
-      <button type="submit">Login</button>
+      <button type="submit" class="submit">Login</button>
     </form>
   </div>
 </template>
@@ -57,4 +60,21 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.auth-container {
+  padding: 10px;
+}
+
+.error {
+  color: red;
+}
+
+.submit {
+  box-shadow: 2px 2px 5px #555;
+}
+
+.submit:active {
+  box-shadow: 2px 0.5px 5px #555;
+  transform: translateY(2px);
+}
+</style>
