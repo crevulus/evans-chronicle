@@ -4,9 +4,15 @@
       <div class="card">
         <img :src="data.source" :alt="data.caption" class="card-img" />
         <div class="text-box">
-          <p>{{ moment(data.timestamp.toDate()).format("MMM Do YYYY") }}</p>
-          <button @click="$emit('delete-post', data.id)">Delete</button>
-          <p>{{ data.caption }}</p>
+          <p>
+            <md-icon>calendar_today</md-icon
+            >{{ moment(data.timestamp.toDate()).format("MMM Do YYYY") }}
+          </p>
+          <button @click="$emit('delete-post', data.id)">
+            Delete<md-icon>delete_forever</md-icon>
+          </button>
+
+          <p><md-icon>speaker_notes</md-icon>{{ data.caption }}</p>
           <Geolocation v-bind:address="data.location" />
         </div>
       </div>

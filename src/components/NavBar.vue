@@ -73,6 +73,10 @@ export default {
 </script>
 
 <style>
+button {
+  border: none;
+}
+
 .auth-btn {
   display: flex;
   align-items: center;
@@ -84,13 +88,13 @@ export default {
 
 .auth-btn:hover {
   background-color: #eeb825;
-  text-decoration: none;
+  text-decoration: none !important;
   border: none;
-  box-shadow: 3px 1px 4px #555;
+  box-shadow: 5px 3px 4px #555;
 }
 
 .auth-btn a {
-  color: white;
+  color: white !important;
   font-size: 14px;
 }
 
@@ -107,7 +111,7 @@ export default {
 }
 
 .link-text {
-  color: white;
+  color: white !important;
   font-size: 1.3em;
 }
 

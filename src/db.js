@@ -54,6 +54,21 @@ const getFamilyImages = async function(collection) {
   return picturesData;
 };
 
+const deletePost = async function(name, doc) {
+  db.collection(name)
+    .doc(doc)
+    .delete()
+    .then(() => console.log(`deleted ${name}, ${doc}`));
+};
+
 const { Timestamp, GeoPoint } = firebase.firestore;
 
-export { db, fb, Timestamp, GeoPoint, getHomeImages, getFamilyImages };
+export {
+  db,
+  fb,
+  Timestamp,
+  GeoPoint,
+  getHomeImages,
+  getFamilyImages,
+  deletePost,
+};

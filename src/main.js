@@ -3,15 +3,16 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-import Vuetify from "vuetify";
-import "vuetify/dist/vuetify.min.css";
-
 import moment from "moment";
+
+import VueMaterial from "vue-material";
+import "vue-material/dist/vue-material.min.css";
+import "vue-material/dist/theme/default.css";
+
+Vue.use(VueMaterial);
 
 // disables warning about development mode
 Vue.config.productionTip = false;
-
-Vue.use(Vuetify);
 
 Vue.prototype.moment = moment;
 

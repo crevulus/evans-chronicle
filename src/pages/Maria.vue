@@ -17,7 +17,14 @@
   </div>
 </template>
 <script>
-import { db, fb, Timestamp, GeoPoint, getFamilyImages } from "../db";
+import {
+  db,
+  fb,
+  Timestamp,
+  GeoPoint,
+  getFamilyImages,
+  deletePost,
+} from "../db";
 import { mapGetters } from "vuex";
 import Cards from "../components/Cards";
 import Modal from "../components/Modal";
@@ -124,8 +131,8 @@ export default {
           this.picturesData = newPicturesData;
         });
     },
-    deleteImage(id) {
-      alert(`delete post: ${id}`);
+    deleteImage(doc) {
+      deletePost(this.$route.name, doc);
     },
   },
   computed: {
