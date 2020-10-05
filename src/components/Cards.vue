@@ -12,10 +12,15 @@
             <button
               v-if="user.loggedIn"
               class="delete-btn"
-              @click="$emit('delete-post', data.id)"
+              @click="toggleDelete"
             >
               <md-icon>delete_forever</md-icon>
             </button>
+            <div v-if="showDeleteWarning" class="delete-warning">
+              <p>Are you sure you want to delete this post?</p>
+              <button @click="$emit('delete-post', data.id)">Yes</button
+              ><button @click="toggleDelete">No</button>
+            </div>
           </div>
           <div>
             <p>
@@ -51,7 +56,13 @@ export default {
     return {
       loaded: false,
       imageAnnotations: "",
+      showDeleteWarning: false,
     };
+  },
+  methods: {
+    toggleDelete() {
+      this.showDeleteWarning = !this.showDeleteWarning;
+    },
   },
   computed: {
     notHome() {
@@ -110,6 +121,13 @@ export default {
 .delete-btn:focus {
   background-color: #b03634;
   border: none;
+}
+
+.delete-warning {
+  border: 1px solid grey;
+  border-radius: 5px;
+  z-index: 10;
+  float: right;
 }
 
 @media screen and (min-width: 1000px) {

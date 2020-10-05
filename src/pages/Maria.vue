@@ -3,7 +3,7 @@
     <Modal v-if="modalOpen" @close-modal="toggleModal" />
     <div :class="{ 'modal-overlay': modalOpen }">
       <div class="heading">
-        <h2 class="title">Maria</h2>
+        <h2 class="title">Maria's Posts</h2>
         <button
           v-if="user.loggedIn"
           @click="newPostButton"
@@ -53,9 +53,9 @@ export default {
     return {
       uploadCaption: "",
       uploadFile: null,
-      dataLoaded: false,
       picturesData: [],
       location: "",
+      dataLoaded: false,
       newPostOpen: false,
       modalOpen: false,
     };
@@ -143,9 +143,6 @@ export default {
             newPicturesData.push(newPictureData);
           });
           this.picturesData = newPicturesData;
-        })
-        .catch((error) => {
-          console.error("Error refreshing images: ", error);
         });
     },
     deleteImage(doc) {
