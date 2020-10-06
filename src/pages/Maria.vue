@@ -13,6 +13,11 @@
           ><md-icon v-else class="icon">expand_less</md-icon>
         </button>
       </div>
+      <md-dialog-alert
+        :md-active.sync="first"
+        md-content="Please input a valid caption and upload a valid image"
+        md-confirm-text="Will do, Christopher"
+      />
       <form v-if="newPostOpen" @submit="uploadData" class="new-post-container">
         <input
           type="text"
@@ -25,7 +30,9 @@
         <button v-if="submitting" disabled>
           <md-icon class="loading">hourglass_empty</md-icon>
         </button>
-        <button v-else type="submit" class="submit">Submit</button>
+        <button v-else type="submit" class="submit">
+          Submit
+        </button>
       </form>
       <div v-if="this.dataLoaded">
         <Cards :imageData="picturesData" @delete-post="deleteImage" />
@@ -63,6 +70,7 @@ export default {
       newPostOpen: false,
       modalOpen: false,
       submitting: false,
+      first: false,
     };
   },
   created() {
@@ -127,7 +135,6 @@ export default {
                     this.location.coords.longitude
                   ),
                 });
-              alert("Post submitted!");
               this.submitting = false;
               this.uploadFile = null;
               this.uploadCaption = null;
@@ -136,7 +143,7 @@ export default {
         );
       } else {
         event.preventDefault();
-        alert("Please upload a valid image file with a valid caption.");
+        this.first = true;
       }
     },
     async renderImages(collection) {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="title-container">
-      <h2 class="title">Evanstagram</h2>
+      <h2 class="md-display-4">Evanstagram.</h2>
     </div>
 
     <div v-if="this.dataLoaded" class="cards-container">
@@ -54,8 +54,6 @@ export default {
 };
 </script>
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap");
-
 .title-container {
   display: flex;
   max-width: 100%;
@@ -64,7 +62,6 @@ export default {
 }
 
 .title {
-  font-family: "Playfair Display", serif;
   font-size: 5rem;
 }
 
