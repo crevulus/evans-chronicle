@@ -9,7 +9,8 @@
           @click="newPostButton"
           class="new-post-btn"
         >
-          New Post
+          New Post<md-icon v-if="!newPostOpen" class="icon">expand_more</md-icon
+          ><md-icon v-else class="icon">expand_less</md-icon>
         </button>
       </div>
       <form v-if="newPostOpen" @submit="uploadData" class="new-post-container">
@@ -21,7 +22,10 @@
           class="new-post-text-input"
         />
         <input type="file" @change="handleImageChange" :value="null" />
-        <button type="submit" class="submit">Submit</button>
+        <button v-if="submitting" disabled>
+          <md-icon class="loading">hourglass_empty</md-icon>
+        </button>
+        <button v-else type="submit" class="submit">Submit</button>
       </form>
       <div v-if="this.dataLoaded">
         <Cards :imageData="picturesData" @delete-post="deleteImage" />
@@ -58,6 +62,7 @@ export default {
       dataLoaded: false,
       newPostOpen: false,
       modalOpen: false,
+      submitting: false,
     };
   },
   created() {
@@ -97,6 +102,7 @@ export default {
     uploadData(event) {
       if (this.uploadCaption !== null && this.uploadFile !== null) {
         event.preventDefault();
+        this.submitting = true;
         let file = this.uploadFile;
         const storageRef = fb.storage().ref("Maria/" + file.name);
         let uploadTask = storageRef.put(file);
@@ -121,6 +127,8 @@ export default {
                     this.location.coords.longitude
                   ),
                 });
+              alert("Post submitted!");
+              this.submitting = false;
               this.uploadFile = null;
               this.uploadCaption = null;
             });
@@ -181,10 +189,17 @@ export default {
 }
 
 .new-post-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   float: right;
   background-color: #b03634;
   max-height: 3rem;
   color: white;
+}
+
+.icon {
+  margin: 0 !important;
 }
 
 .new-post-btn:hover {
@@ -215,5 +230,19 @@ export default {
 
 .new-post-text-input {
   background-color: white;
+}
+
+.loading {
+  animation: rotation 2s infinite linear;
+  transform-origin: 50% 50%;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
 }
 </style>
