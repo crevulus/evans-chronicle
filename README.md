@@ -10,7 +10,7 @@
 - [] Error handling (general)
 - [x] Hide API key
 - [] Find out why can't pass name param for refreshImages fn
-- [] UX feedback for submitting a new post
+- [x] UX feedback for submitting a new post
 - [x] Up/down icon for new post
 - [] Mobile design
-- [] Replace font for title
+- [x] Replace font for title

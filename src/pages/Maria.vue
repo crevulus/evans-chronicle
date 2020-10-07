@@ -13,11 +13,6 @@
           ><md-icon v-else class="icon">expand_less</md-icon>
         </button>
       </div>
-      <md-dialog-alert
-        :md-active.sync="first"
-        md-content="Please input a valid caption and upload a valid image"
-        md-confirm-text="Will do, Christopher"
-      />
       <form v-if="newPostOpen" @submit="uploadData" class="new-post-container">
         <input
           type="text"
@@ -136,6 +131,7 @@ export default {
                   ),
                 });
               this.submitting = false;
+              alert("Post submitted!");
               this.uploadFile = null;
               this.uploadCaption = null;
             });
@@ -143,7 +139,7 @@ export default {
         );
       } else {
         event.preventDefault();
-        this.first = true;
+        alert("Please input a valid caption & image.");
       }
     },
     async renderImages(collection) {
@@ -178,15 +174,15 @@ export default {
 };
 </script>
 <style>
-.modal-overlay {
+/* .modal-overlay {
   z-index: 1;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  -webkit-filter: blur(4px); /* Chrome, Safari, Opera */
+  -webkit-filter: blur(4px); -- Chrome, Safari, Opera
   filter: blur(4px);
-}
+} */
 
 .heading {
   display: grid;

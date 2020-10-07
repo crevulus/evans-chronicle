@@ -16,12 +16,6 @@
             >
               <md-icon>delete_forever</md-icon>
             </button>
-            <div v-if="showDeleteWarning" class="delete-warning">
-              <p>Are you sure you want to delete this post?</p>
-              <button @click="$emit('delete-post', data.id)" class="submit">
-                Yes</button
-              ><button @click="toggleDelete" class="submit">No</button>
-            </div>
           </div>
 
           <div>
@@ -31,6 +25,18 @@
             </p>
           </div>
           <Geolocation v-bind:address="data.location" />
+          <div v-if="showDeleteWarning" class="delete-warning">
+            <p>Are you sure you want to delete this post?</p>
+            <button
+              @click="
+                $emit('delete-post', data.id);
+                toggleDelete();
+              "
+              class="submit"
+            >
+              Yes</button
+            ><button @click="toggleDelete" class="submit">No</button>
+          </div>
         </div>
       </div>
     </div>
@@ -78,7 +84,7 @@ export default {
 </script>
 <style>
 .card {
-  max-width: 80%;
+  max-width: 90%;
   margin: auto;
   margin-bottom: 4em;
   border: 1px solid #555;
@@ -132,13 +138,23 @@ export default {
 
 .delete-warning {
   float: right;
-  background-color: white;
-  border: 1px solid grey;
-  border-radius: 5px;
+  position: absolute;
   z-index: 10 !important;
+  background-color: rgb(202, 200, 200);
+  margin: 5px 10px 20px 10px;
+  padding: 5px;
+  border: 1px solid #999;
+  border-radius: 5px;
 }
 
 @media screen and (min-width: 1000px) {
+  .cards-container-not-home {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 1350px) {
   .cards-container-not-home {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;

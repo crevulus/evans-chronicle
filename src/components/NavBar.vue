@@ -73,8 +73,16 @@ export default {
 </script>
 
 <style>
-button {
-  border: none;
+.NavBar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+  height: 4em;
+  background-color: #6154b3;
+  box-shadow: 0px 1px 5px #555;
 }
 
 .auth-btn {
@@ -83,7 +91,6 @@ button {
   margin: 0;
   cursor: pointer;
   background-color: #eeb825;
-  max-height: 50%;
 }
 
 .auth-btn:hover {
@@ -116,18 +123,6 @@ button {
 .auth-btn-text:focus {
   text-decoration: none !important;
   color: white;
-}
-
-.NavBar {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  text-align: center;
-  width: 100%;
-  margin: 0;
-  height: 4em;
-  background-color: #6154b3;
-  text-align: center;
 }
 
 .link-text {

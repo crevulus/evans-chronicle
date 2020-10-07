@@ -18,4 +18,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+button {
+  border: none;
+}
+</style>

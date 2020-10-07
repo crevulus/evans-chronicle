@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="title-container">
-      <h2 class="md-display-4">Evanstagram.</h2>
+      <h1 class="md-display-4 title">Evanstagram.</h1>
     </div>
 
     <div v-if="this.dataLoaded" class="cards-container">
@@ -62,11 +62,7 @@ export default {
 }
 
 .title {
-  font-size: 5rem;
-}
-
-.title-crest {
-  max-height: 4.5rem;
+  color: #888;
 }
 
 h2 {
@@ -76,7 +72,14 @@ h2 {
 @media screen and (min-width: 1000px) {
   .cards-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 1350px) {
+  .cards-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 </style>
