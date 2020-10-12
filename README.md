@@ -8,7 +8,7 @@
 - [x] Upload form -> dropdown
 - [x] Auth
 - [] Error handling (general)
-- [x] Hide API key
+- [] Hide API key
 - [] Find out why can't pass name param for refreshImages fn
 - [x] UX feedback for submitting a new post
 - [x] Up/down icon for new post

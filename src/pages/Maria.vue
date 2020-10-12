@@ -49,6 +49,8 @@ import { mapGetters } from "vuex";
 import Cards from "../components/Cards";
 import Modal from "../components/Modal";
 
+import store from "../store"
+
 export default {
   name: "Maria",
   components: {
@@ -69,14 +71,6 @@ export default {
     };
   },
   created() {
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        this.location = pos;
-      },
-      (err) => {
-        console.log(err.message);
-      }
-    );
   },
   mounted() {
     this.renderImages("Maria");
@@ -84,12 +78,20 @@ export default {
   },
   methods: {
     newPostButton() {
-      if (this.user.loggedIn === false) {
-        this.toggleModal();
-      } else {
-        this.toggleNewPost();
-      }
-    },
+    this.toggleNewPost();
+      navigator.permissions.query({name: "geolocation"})
+        .then(status => {
+        if (status.state === "granted") {
+          store.dispatch("allowLocationTracking")
+        }});
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          this.location = pos;
+        },
+        (err) => {
+          console.log(err.message);
+        }
+    )},
     toggleNewPost() {
       this.newPostOpen = !this.newPostOpen;
     },
@@ -119,7 +121,8 @@ export default {
             uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
               console.log("File available at ", downloadURL);
               console.log(this.uploadCaption);
-              db.collection("Maria")
+              if (this.user.locationAllowed) {
+                db.collection("Maria")
                 .doc()
                 .set({
                   caption: this.uploadCaption,
@@ -130,6 +133,15 @@ export default {
                     this.location.coords.longitude
                   ),
                 });
+              } else {
+                db.collection("Maria")
+                .doc()
+                .set({
+                  caption: this.uploadCaption,
+                  source: downloadURL,
+                  timestamp: Timestamp.now(),
+                });
+              }
               this.submitting = false;
               alert("Post submitted!");
               this.uploadFile = null;

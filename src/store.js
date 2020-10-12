@@ -8,6 +8,7 @@ export default new Vuex.Store({
     user: {
       loggedIn: false,
       data: null,
+      locationAllowed: false,
     },
   },
   // getters access data stored in state
@@ -24,6 +25,9 @@ export default new Vuex.Store({
     SET_USER(state, data) {
       state.user.data = data;
     },
+    SET_LOCATION_PERMISSION(state) {
+      state.user.locationAllowed = true;
+    },
   },
   // actions trigger mutations
   actions: {
@@ -37,6 +41,9 @@ export default new Vuex.Store({
       } else {
         commit("SET_USER", null);
       }
+    },
+    allowLocationTracking({ commit }) {
+      commit("SET_LOCATION_PERMISSION");
     },
   },
 });

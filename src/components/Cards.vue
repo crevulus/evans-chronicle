@@ -24,7 +24,7 @@
               >{{ data.caption }}
             </p>
           </div>
-          <Geolocation v-bind:address="data.location" />
+          <Geolocation v-show="data.location" v-bind:address="data.location" />
           <div v-if="showDeleteWarning" class="delete-warning">
             <p>Are you sure you want to delete this post?</p>
             <button
