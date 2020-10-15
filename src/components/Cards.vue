@@ -10,7 +10,7 @@
               >{{ moment(data.timestamp.toDate()).format("MMM Do YYYY") }}
             </p>
             <button
-              v-if="user.loggedIn"
+              v-show="user.loggedIn"
               class="delete-btn"
               @click="toggleDelete"
             >
@@ -24,8 +24,8 @@
               >{{ data.caption }}
             </p>
           </div>
-          <Geolocation v-show="data.location" v-bind:address="data.location" />
-          <div v-if="showDeleteWarning" class="delete-warning">
+          <Geolocation v-if="data.location" v-bind:address="data.location" />
+          <div v-show="showDeleteWarning" class="delete-warning">
             <p>Are you sure you want to delete this post?</p>
             <button
               @click="

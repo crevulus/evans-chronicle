@@ -1,11 +1,11 @@
 <template>
   <div>
-    <Modal v-if="modalOpen" @close-modal="toggleModal" />
+    <Modal v-show="modalOpen" @close-modal="toggleModal" />
     <div :class="{ 'modal-overlay': modalOpen }">
       <div class="heading">
         <h2 class="title">Maria's Posts</h2>
         <button
-          v-if="user.loggedIn"
+          v-show="user.loggedIn"
           @click="newPostButton"
           class="new-post-btn"
         >
@@ -13,7 +13,7 @@
           ><md-icon v-else class="icon">expand_less</md-icon>
         </button>
       </div>
-      <form v-if="newPostOpen" @submit="uploadData" class="new-post-container">
+      <form v-show="newPostOpen" @submit="uploadData" class="new-post-container">
         <input
           type="text"
           @change="handleCaptionChange"

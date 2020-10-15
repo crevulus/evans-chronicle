@@ -14,5 +14,6 @@
 - [x] Up/down icon for new post
 - [] Mobile design
 - [x] Replace font for title
-- [] Change v-ifs to v-shows when not rendering to DOM but merely displaying (more performant)
+- [x] Change v-ifs to v-shows when not rendering to DOM but merely displaying (more performant)
 - [] Change template logic to computed props (more performant)
+- [] Delete window showing for all posts

@@ -1,5 +1,8 @@
 <template>
   <div id="NavBar" class="NavBar">
+    <div class="burger">
+      test
+    </div>
     <router-link to="/" exact>
       <img src="../assets/evans.png" class="crest" />
     </router-link>
@@ -49,6 +52,7 @@ export default {
           route: "/Christopher",
         },
       ],
+      isBurgerActive: false,
     };
   },
   methods: {
@@ -61,6 +65,9 @@ export default {
             name: "home",
           });
         });
+    },
+    toggleBurger() {
+      this.isBurgerActive = !this.isBurgerActive
     },
   },
   computed: {
@@ -83,6 +90,10 @@ export default {
   height: 4em;
   background-color: #6154b3;
   box-shadow: 0px 1px 5px #555;
+}
+
+.burger {
+  display: none;
 }
 
 .auth-btn {
@@ -146,5 +157,15 @@ export default {
   max-width: 90%;
   margin: auto;
   float: left;
+}
+
+@media screen and (max-width:600px) {
+  .burger {
+    display: block;
+  }
+
+  .family-member {
+    display: none;
+  }
 }
 </style>

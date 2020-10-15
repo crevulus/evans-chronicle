@@ -69,6 +69,13 @@ h2 {
   text-align: center;
 }
 
+@media screen and (min-width: 1350px) {
+  .cards-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 @media screen and (min-width: 1000px) {
   .cards-container {
     display: grid;
@@ -76,10 +83,15 @@ h2 {
   }
 }
 
-@media screen and (min-width: 1350px) {
-  .cards-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+@media screen and (max-width: 700px) {
+  .title-container {
+    max-width: 100%;
+  }
+
+  .title {
+    font-size: 17vw
   }
 }
+
+
 </style>
