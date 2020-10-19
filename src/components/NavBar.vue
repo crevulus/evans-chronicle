@@ -1,12 +1,16 @@
 <template>
   <div id="NavBar" class="NavBar">
-    <div class="burger">
-      test
-    </div>
+    <Burger class="burger"/>
     <router-link to="/" exact>
       <img src="../assets/evans.png" class="crest" />
     </router-link>
-
+    <SidePanel v-show="isMobileNavOpen">
+     <ul class="sidebar-panel-nav">
+       <li><a href="#home">Home</a></li>
+       <li><a href="#about">About</a></li>
+       <li><a href="#contact">Contact</a></li>
+     </ul>
+   </SidePanel>
     <span
       v-for="member in family"
       v-bind:key="member.name"
@@ -29,8 +33,15 @@
 import firebase from "firebase";
 import { mapGetters } from "vuex";
 
+import Burger from './Burger'
+import SidePanel from './SidePanel'
+
 export default {
   name: "NavBar",
+  components: {
+    Burger,
+    SidePanel,
+  },
   data() {
     return {
       documents: [],
@@ -52,7 +63,6 @@ export default {
           route: "/Christopher",
         },
       ],
-      isBurgerActive: false,
     };
   },
   methods: {
@@ -65,9 +75,6 @@ export default {
             name: "home",
           });
         });
-    },
-    toggleBurger() {
-      this.isBurgerActive = !this.isBurgerActive
     },
   },
   computed: {

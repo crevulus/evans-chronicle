@@ -10,11 +10,15 @@ export default new Vuex.Store({
       data: null,
       locationAllowed: false,
     },
+    isMobileNavOpen: true,
   },
   // getters access data stored in state
   getters: {
     user(state) {
       return state.user;
+    },
+    nav(state) {
+      return state.isMobileNavOpen;
     },
   },
   // mutations alter data stored in state
@@ -27,6 +31,9 @@ export default new Vuex.Store({
     },
     SET_LOCATION_PERMISSION(state) {
       state.user.locationAllowed = true;
+    },
+    TOGGLE_MOBILE_NAV(state) {
+      state.isMobileNavOpen = !state.isMobileNavOpen;
     },
   },
   // actions trigger mutations
@@ -44,6 +51,9 @@ export default new Vuex.Store({
     },
     allowLocationTracking({ commit }) {
       commit("SET_LOCATION_PERMISSION");
+    },
+    toggleNav({ commit }) {
+      commit("TOGGLE_MOBILE_NAV");
     },
   },
 });
