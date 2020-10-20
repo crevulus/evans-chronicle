@@ -260,4 +260,21 @@ export default {
     transform: rotate(359deg);
   }
 }
+
+@media screen and (max-width:600px) {
+  .heading {
+    display: grid;
+    grid-template-columns: 60% 40%;
+  }
+  
+  .new-post-btn {
+    margin: 0;
+  }
+}
+
+@media screen and (max-width:350px) {
+  .new-post-btn i {
+    display: none;
+  }
+}
 </style>
