@@ -10,7 +10,7 @@ export default new Vuex.Store({
       data: null,
       locationAllowed: false,
     },
-    isMobileNavOpen: true,
+    isMobileNavOpen: false,
   },
   // getters access data stored in state
   getters: {
