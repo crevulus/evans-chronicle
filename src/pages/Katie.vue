@@ -1,18 +1,19 @@
 <template>
   <div>
-    <Modal v-if="modalOpen" @close-modal="toggleModal" />
+    <Modal v-show="modalOpen" @close-modal="toggleModal" />
     <div :class="{ 'modal-overlay': modalOpen }">
       <div class="heading">
         <h2 class="title">Katie's Posts</h2>
         <button
-          v-if="user.loggedIn"
+          v-show="user.loggedIn"
           @click="newPostButton"
           class="new-post-btn"
         >
-          New Post
+          New Post<md-icon v-if="!newPostOpen" class="icon">expand_more</md-icon
+          ><md-icon v-else class="icon">expand_less</md-icon>
         </button>
       </div>
-      <form v-if="newPostOpen" @submit="uploadData" class="new-post-container">
+      <form v-show="newPostOpen" @submit="uploadData" class="new-post-container">
         <input
           type="text"
           @change="handleCaptionChange"
@@ -21,7 +22,12 @@
           class="new-post-text-input"
         />
         <input type="file" @change="handleImageChange" :value="null" />
-        <button type="submit">Submit</button>
+        <button v-if="submitting" disabled>
+          <md-icon class="loading">hourglass_empty</md-icon>
+        </button>
+        <button v-else type="submit" class="submit">
+          Submit
+        </button>
       </form>
       <div v-if="this.dataLoaded">
         <Cards :imageData="picturesData" @delete-post="deleteImage" />
@@ -43,6 +49,8 @@ import { mapGetters } from "vuex";
 import Cards from "../components/Cards";
 import Modal from "../components/Modal";
 
+import store from "../store"
+
 export default {
   name: "Katie",
   components: {
@@ -58,17 +66,11 @@ export default {
       dataLoaded: false,
       newPostOpen: false,
       modalOpen: false,
+      submitting: false,
+      first: false,
     };
   },
   created() {
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        this.location = pos;
-      },
-      (err) => {
-        console.log(err.message);
-      }
-    );
   },
   mounted() {
     this.renderImages("Katie");
@@ -76,12 +78,20 @@ export default {
   },
   methods: {
     newPostButton() {
-      if (this.user.loggedIn === false) {
-        this.toggleModal();
-      } else {
-        this.toggleNewPost();
-      }
-    },
+    this.toggleNewPost();
+      navigator.permissions.query({name: "geolocation"})
+        .then(status => {
+        if (status.state === "granted") {
+          store.dispatch("allowLocationTracking")
+        }});
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          this.location = pos;
+        },
+        (err) => {
+          console.log(err.message);
+        }
+    )},
     toggleNewPost() {
       this.newPostOpen = !this.newPostOpen;
     },
@@ -95,36 +105,54 @@ export default {
       this.uploadFile = event.target.files[0];
     },
     uploadData(event) {
-      event.preventDefault();
-      let file = this.uploadFile;
-      const storageRef = fb.storage().ref("Katie/" + file.name);
-      let uploadTask = storageRef.put(file);
-      uploadTask.on(
-        "state_changed",
-        () => {},
-        (error) => {
-          console.error(error);
-        },
-        () => {
-          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-            console.log("File available at ", downloadURL);
-            console.log(this.uploadCaption);
-            db.collection("Katie")
-              .doc()
-              .set({
-                caption: this.uploadCaption,
-                source: downloadURL,
-                timestamp: Timestamp.now(),
-                location: new GeoPoint(
-                  this.location.coords.latitude,
-                  this.location.coords.longitude
-                ),
-              });
-            this.uploadFile = null;
-            this.uploadCaption = null;
-          });
-        }
-      );
+      if (this.uploadCaption !== null && this.uploadFile !== null) {
+        event.preventDefault();
+        this.submitting = true;
+        let file = this.uploadFile;
+        const storageRef = fb.storage().ref("Katie/" + file.name);
+        let uploadTask = storageRef.put(file);
+        uploadTask.on(
+          "state_changed",
+          () => {},
+          (error) => {
+            console.error(error);
+          },
+          () => {
+            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+              console.log("File available at ", downloadURL);
+              console.log(this.uploadCaption);
+              if (this.user.locationAllowed) {
+                db.collection("Katie")
+                .doc()
+                .set({
+                  caption: this.uploadCaption,
+                  source: downloadURL,
+                  timestamp: Timestamp.now(),
+                  location: new GeoPoint(
+                    this.location.coords.latitude,
+                    this.location.coords.longitude
+                  ),
+                });
+              } else {
+                db.collection("Katie")
+                .doc()
+                .set({
+                  caption: this.uploadCaption,
+                  source: downloadURL,
+                  timestamp: Timestamp.now(),
+                });
+              }
+              this.submitting = false;
+              alert("Post submitted!");
+              this.uploadFile = null;
+              this.uploadCaption = null;
+            });
+          }
+        );
+      } else {
+        event.preventDefault();
+        alert("Please input a valid caption & image.");
+      }
     },
     async renderImages(collection) {
       await getFamilyImages(collection).then(
@@ -158,15 +186,15 @@ export default {
 };
 </script>
 <style>
-.modal-overlay {
+/* .modal-overlay {
   z-index: 1;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  -webkit-filter: blur(4px); /* Chrome, Safari, Opera */
+  -webkit-filter: blur(4px); -- Chrome, Safari, Opera
   filter: blur(4px);
-}
+} */
 
 .heading {
   display: grid;
@@ -176,22 +204,35 @@ export default {
 }
 
 .new-post-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   float: right;
   background-color: #b03634;
   max-height: 3rem;
   color: white;
 }
 
+.icon {
+  margin: 0 !important;
+}
+
 .new-post-btn:hover {
   background-color: #a33432;
   text-decoration: none;
   border: none;
-  box-shadow: 1px 1px 4px #999;
+  box-shadow: 2px 1px 4px #999;
 }
 
 .new-post-btn:focus {
   background-color: #b03634;
   border: none;
+}
+
+.new-post-btn:active {
+  box-shadow: 0.5px 0.5px 4px #555;
+  box-shadow: 2px 0.5px 5px #555;
+  transform: translateY(1px);
 }
 
 .new-post-container {
@@ -204,5 +245,37 @@ export default {
 
 .new-post-text-input {
   background-color: white;
+}
+
+.loading {
+  animation: rotation 2s infinite linear;
+  transform-origin: 50% 50%;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+@media screen and (max-width:600px) {
+  .heading {
+    display: grid;
+    grid-template-columns: 60% 40% !important;
+  }
+  
+  .new-post-btn {
+    margin: 0;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width:360px) {
+  .new-post-btn i {
+    display: none;
+  }
 }
 </style>

@@ -264,15 +264,16 @@ export default {
 @media screen and (max-width:600px) {
   .heading {
     display: grid;
-    grid-template-columns: 60% 40%;
+    grid-template-columns: 60% 40% !important;
   }
   
   .new-post-btn {
     margin: 0;
+    justify-content: center;
   }
 }
 
-@media screen and (max-width:350px) {
+@media screen and (max-width:360px) {
   .new-post-btn i {
     display: none;
   }

@@ -1,10 +1,7 @@
 <template>
   <div id="NavBar" class="NavBar">
-    <SidePanel v-show="isMobileNavOpen">
-      <p>Chris</p>
-      <p>Christopher</p>
-    </SidePanel>
-    <div class="side-panel-button" @click.prevent="toggleSidePanel">
+    <SidePanel v-show="isMobileNavOpen" :family="family"/>
+    <div class="side-panel-button div-button" @click.prevent="toggleSidePanel">
       Menu
     </div>
     <router-link to="/" exact>
@@ -96,10 +93,14 @@ export default {
   text-align: center;
   width: 100%;
   margin: 0;
-  padding: 0.3rem 1rem;
+  padding: 0.3rem 5rem;
   height: 4em;
   background-color: #6154b3;
   box-shadow: 0px 1px 5px #555;
+}
+
+.div-button {
+  cursor: pointer;
 }
 
 .side-panel-button {
@@ -169,6 +170,12 @@ export default {
   float: left;
 }
 
+@media screen and (max-width:800px) {
+  .NavBar {
+    padding: 0.3rem 2rem;
+  }
+}
+
 @media screen and (max-width:600px) {
   .NavBar {
     display: grid;
@@ -181,6 +188,8 @@ export default {
     grid-column-start: 1;
     display: block;
     color: white;
+    text-shadow: 1px 1px #555;
+    font-size: 18px;
   }
 
   .crest {

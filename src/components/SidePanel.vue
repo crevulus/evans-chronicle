@@ -5,8 +5,15 @@
     </div>
     <transition name="slide">
       <div v-if="isMobileNavOpen" class="side-panel-container">
-        <div @click.prevent="toggleSidePanel">Close</div>
-        <slot></slot>
+          <h3 v-for="member in family" :key="member.name" @click.prevent="toggleSidePanel">
+            <router-link :to="member.route" class="link-text">
+              {{ member.name }}
+            </router-link>
+            <hr/>
+          </h3>
+          <br/>
+          <br/>
+        <div @click.prevent="toggleSidePanel" class="close-panel div-button">Close<md-icon>close</md-icon></div>
       </div>
     </transition>
   </div>
@@ -17,6 +24,11 @@ import { mapGetters } from "vuex";
 import store from "../store"
 
 export default {
+  props: {
+    family: {
+      type: Array,
+    }
+  },
   methods: {
     toggleSidePanel() {
       store.dispatch("toggleNav")
@@ -32,6 +44,20 @@ export default {
 </script>
 
 <style>
+hr {
+  width: 60%;
+}
+
+.close-panel {
+  border-radius: 5px;
+  color: #b03634;
+  font-size: 16px;
+}
+
+.close-panel i {
+  font-size: inherit !important;
+}
+
 .slide-enter-active {
     transition: transform 0.2s ease;
 }
@@ -53,7 +79,7 @@ export default {
 
 .side-panel-container {
     overflow-y: auto;
-    background-color: #130f4000;
+    background-color: #130f40;
     position: fixed;
     left: 0;
     top: 0;
