@@ -1,15 +1,15 @@
 <template>
   <div id="NavBar" class="NavBar">
-    <div class="burger" @click.prevent="toggleSidePanel">
+    <SidePanel v-show="isMobileNavOpen">
+      <p>Chris</p>
+      <p>Christopher</p>
+    </SidePanel>
+    <div class="side-panel-button" @click.prevent="toggleSidePanel">
       Menu
     </div>
     <router-link to="/" exact>
       <img src="../assets/evans.png" class="crest" />
     </router-link>
-    <SidePanel v-show="isMobileNavOpen">
-      <p>Chris</p>
-      <p>Christopher</p>
-    </SidePanel>
     <span
       v-for="member in family"
       v-bind:key="member.name"
@@ -91,17 +91,18 @@ export default {
 <style>
 .NavBar {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   text-align: center;
   width: 100%;
   margin: 0;
+  padding: 0.3rem 1rem;
   height: 4em;
   background-color: #6154b3;
   box-shadow: 0px 1px 5px #555;
 }
 
-.burger {
+.side-panel-button {
   display: none;
 }
 
@@ -169,9 +170,29 @@ export default {
 }
 
 @media screen and (max-width:600px) {
-  .burger {
+  .NavBar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    padding: 0.3rem 1rem;
+  }
+  
+  .side-panel-button {
+    grid-column-start: 1;
     display: block;
     color: white;
+  }
+
+  .crest {
+    grid-column-start: 2;
+  }
+
+  .auth-btn {
+    grid-column-start: 3;
+    margin: 0;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    background-color: #eeb825;
   }
 
   .family-member {
