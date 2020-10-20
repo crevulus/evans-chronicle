@@ -21,7 +21,7 @@
           placeholder="Type your caption here..."
           class="new-post-text-input"
         />
-        <input type="file" @change="handleImageChange" :value="null" />
+        <input type="file" @change="handleImageChange" :value="null" class="choose-file"/>
         <button v-if="submitting" disabled>
           <md-icon class="loading">hourglass_empty</md-icon>
         </button>
@@ -273,7 +273,11 @@ export default {
   }
 }
 
-@media screen and (max-width:360px) {
+@media screen and (max-width:400px) {  
+  .choose-file {
+    display: block;
+    margin: 1rem 0;
+  }
   .new-post-btn i {
     display: none;
   }

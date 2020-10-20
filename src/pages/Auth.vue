@@ -77,4 +77,11 @@ export default {
   box-shadow: 2px 0.5px 5px #555;
   transform: translateY(2px);
 }
+
+@media screen and (max-width:400px) {  
+  .submit {
+    display: block;
+    margin: 1rem 0;
+  }
+}
 </style>
