@@ -10,7 +10,7 @@
               >{{ moment(data.timestamp.toDate()).format("MMM Do YYYY") }}
             </p>
             <button
-              v-show="user.loggedIn"
+              v-show="user.loggedIn === userEmail && notHome"
               class="delete-btn"
               @click="toggleDelete"
             >
@@ -58,6 +58,9 @@ export default {
     },
     deleteImage: {
       type: Function,
+    },
+    userEmail: {
+      type: String,
     },
   },
   data() {

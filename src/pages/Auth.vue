@@ -78,7 +78,7 @@ export default {
   transform: translateY(2px);
 }
 
-@media screen and (max-width:400px) {  
+@media screen and (max-width: 400px) {
   .submit {
     display: block;
     margin: 1rem 0;
