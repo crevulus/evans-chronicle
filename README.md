@@ -15,6 +15,7 @@
 - [x] Mobile design; https://regenrek.com/posts/how-to-create-an-animated-vue-sidebar-menu-with-vue-observable/
 - [x] Replace font for title
 - [x] Change v-ifs to v-shows when not rendering to DOM but merely displaying (more performant)
-      ~~Change template logic to computed props (more performant)~~
+- [x] ~~Change template logic to computed props (more performant)~~
 - [ ] Delete window showing for all posts
 - [ ] Location on safari
+- [ ] Rendering anew on page switching

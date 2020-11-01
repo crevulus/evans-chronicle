@@ -10,7 +10,7 @@
               >{{ moment(data.timestamp.toDate()).format("MMM Do YYYY") }}
             </p>
             <button
-              v-show="user.loggedIn === userEmail && notHome"
+              v-show="user.loggedIn && user.data.email === userEmail && notHome"
               class="delete-btn"
               @click="toggleDelete"
             >
@@ -18,7 +18,7 @@
             </button>
           </div>
 
-          <div>
+          <div class="icon-and-text">
             <p>
               <md-icon class="card-icon">speaker_notes</md-icon
               >{{ data.caption }}
@@ -93,6 +93,7 @@ export default {
   border: 1px solid #555;
   border-radius: 5px;
   box-shadow: 1px 1px 4px #555;
+  background-color: white;
 }
 
 .card-img {
@@ -102,16 +103,22 @@ export default {
 }
 
 .text-container {
-  margin: 1em;
-}
-
-.card-icon {
-  color: #b03634;
-  margin-right: 3px !important;
+  margin: 2em 1em;
 }
 
 .icon-and-text {
   margin: auto;
+}
+
+.icon-and-text p {
+  display: grid;
+  grid-template-columns: 1fr 8fr;
+  align-items: center;
+}
+
+.card-icon {
+  color: #b03634;
+  /* margin-right: 5px !important; */
 }
 
 .delete-btn {
@@ -120,6 +127,7 @@ export default {
   align-self: center;
   max-height: 2rem;
   padding: 2px;
+  bottom: 0;
 }
 
 .delete-btn:hover {

@@ -13,7 +13,11 @@
           ><md-icon v-else class="icon">expand_less</md-icon>
         </button>
       </div>
-      <form v-show="newPostOpen" @submit="uploadData" class="new-post-container">
+      <form
+        v-show="newPostOpen"
+        @submit="uploadData"
+        class="new-post-container"
+      >
         <input
           type="text"
           @change="handleCaptionChange"
@@ -21,7 +25,12 @@
           placeholder="Type your caption here..."
           class="new-post-text-input"
         />
-        <input type="file" @change="handleImageChange" :value="null" class="choose-file"/>
+        <input
+          type="file"
+          @change="handleImageChange"
+          :value="null"
+          class="choose-file"
+        />
         <button v-if="submitting" disabled>
           <md-icon class="loading">hourglass_empty</md-icon>
         </button>
@@ -49,7 +58,7 @@ import { mapGetters } from "vuex";
 import Cards from "../components/Cards";
 import Modal from "../components/Modal";
 
-import store from "../store"
+import store from "../store";
 
 export default {
   name: "Maria",
@@ -70,20 +79,19 @@ export default {
       first: false,
     };
   },
-  created() {
-  },
+  created() {},
   mounted() {
     this.renderImages("Maria");
     this.refreshImages();
   },
   methods: {
     newPostButton() {
-    this.toggleNewPost();
-      navigator.permissions.query({name: "geolocation"})
-        .then(status => {
+      this.toggleNewPost();
+      navigator.permissions.query({ name: "geolocation" }).then((status) => {
         if (status.state === "granted") {
-          store.dispatch("allowLocationTracking")
-        }});
+          store.dispatch("allowLocationTracking");
+        }
+      });
       navigator.geolocation.getCurrentPosition(
         (pos) => {
           this.location = pos;
@@ -91,7 +99,8 @@ export default {
         (err) => {
           console.log(err.message);
         }
-    )},
+      );
+    },
     toggleNewPost() {
       this.newPostOpen = !this.newPostOpen;
     },
@@ -123,24 +132,24 @@ export default {
               console.log(this.uploadCaption);
               if (this.user.locationAllowed) {
                 db.collection("Maria")
-                .doc()
-                .set({
-                  caption: this.uploadCaption,
-                  source: downloadURL,
-                  timestamp: Timestamp.now(),
-                  location: new GeoPoint(
-                    this.location.coords.latitude,
-                    this.location.coords.longitude
-                  ),
-                });
+                  .doc()
+                  .set({
+                    caption: this.uploadCaption,
+                    source: downloadURL,
+                    timestamp: Timestamp.now(),
+                    location: new GeoPoint(
+                      this.location.coords.latitude,
+                      this.location.coords.longitude
+                    ),
+                  });
               } else {
                 db.collection("Maria")
-                .doc()
-                .set({
-                  caption: this.uploadCaption,
-                  source: downloadURL,
-                  timestamp: Timestamp.now(),
-                });
+                  .doc()
+                  .set({
+                    caption: this.uploadCaption,
+                    source: downloadURL,
+                    timestamp: Timestamp.now(),
+                  });
               }
               this.submitting = false;
               alert("Post submitted!");
@@ -200,7 +209,7 @@ export default {
   display: grid;
   grid-template-columns: 80% 20%;
   align-items: center;
-  margin: 0 10px;
+  margin: 0 20px !important;
 }
 
 .new-post-btn {
@@ -261,19 +270,19 @@ export default {
   }
 }
 
-@media screen and (max-width:600px) {
+@media screen and (max-width: 600px) {
   .heading {
     display: grid;
     grid-template-columns: 60% 40% !important;
   }
-  
+
   .new-post-btn {
     margin: 0;
     justify-content: center;
   }
 }
 
-@media screen and (max-width:400px) {  
+@media screen and (max-width: 400px) {
   .choose-file {
     display: block;
     margin: 1rem 0;

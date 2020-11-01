@@ -209,7 +209,7 @@ export default {
   display: grid;
   grid-template-columns: 80% 20%;
   align-items: center;
-  margin: 0 10px;
+  margin: 0 20px !important;
 }
 
 .new-post-btn {

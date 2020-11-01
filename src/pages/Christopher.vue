@@ -5,7 +5,7 @@
       <div class="heading">
         <h2 class="title">Christopher's Posts</h2>
         <button
-          v-show="user.loggedIn === userEmail"
+          v-show="user.loggedIn && user.data.email === userEmail"
           @click="newPostButton"
           class="new-post-btn"
         >
@@ -214,7 +214,7 @@ export default {
   display: grid;
   grid-template-columns: 80% 20%;
   align-items: center;
-  margin: 0 10px;
+  margin: 0 20px !important;
 }
 
 .new-post-btn {

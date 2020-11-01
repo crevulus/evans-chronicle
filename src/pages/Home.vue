@@ -59,6 +59,7 @@ export default {
   max-width: 100%;
   max-height: 8rem;
   justify-content: center;
+  margin-bottom: 2rem;
 }
 
 .title {
@@ -66,6 +67,7 @@ export default {
 }
 
 h2 {
+  color: #555;
   text-align: center;
 }
 
@@ -89,9 +91,7 @@ h2 {
   }
 
   .title {
-    font-size: 17vw
+    font-size: 17vw;
   }
 }
-
-
 </style>

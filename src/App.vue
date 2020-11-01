@@ -23,4 +23,8 @@ export default {
 button {
   border: none;
 }
+
+body {
+  background-color: #f1f1f1;
+}
 </style>

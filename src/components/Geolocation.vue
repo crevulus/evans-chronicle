@@ -1,5 +1,7 @@
 <template>
-  <p><md-icon class="card-icon">explore</md-icon>{{ locationData }}</p>
+  <div class="icon-and-text">
+    <p><md-icon class="card-icon">explore</md-icon>{{ locationData }}</p>
+  </div>
 </template>
 <script>
 export default {
