@@ -5,7 +5,7 @@
       <div class="heading">
         <h2 class="title">Paul's Posts</h2>
         <button
-          v-show="user.loggedIn"
+          v-show="user.loggedIn && user.data.email === userEmail"
           @click="newPostButton"
           class="new-post-btn"
         >
@@ -39,7 +39,11 @@
         </button>
       </form>
       <div v-if="this.dataLoaded">
-        <Cards :imageData="picturesData" @delete-post="deleteImage" />
+        <Cards
+          :imageData="picturesData"
+          @delete-post="deleteImage"
+          :userEmail="userEmail"
+        />
       </div>
       <h4 v-else>Loading...</h4>
     </div>
@@ -77,6 +81,7 @@ export default {
       modalOpen: false,
       submitting: false,
       first: false,
+      userEmail: "pevans@velocityclinical.com",
     };
   },
   created() {},

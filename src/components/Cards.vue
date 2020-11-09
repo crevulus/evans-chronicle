@@ -2,7 +2,13 @@
   <div v-bind:class="{ 'cards-container-not-home': notHome }">
     <div v-for="data in imageData" :key="data.id">
       <div class="card">
-        <img :src="data.source" :alt="data.caption" class="card-img" />
+        <video
+          v-if="regex.test(data.source)"
+          :src="data.source"
+          class="card-img"
+          controls
+        />
+        <img v-else :src="data.source" :alt="data.caption" class="card-img" />
         <div class="text-container">
           <div class="icon-and-text">
             <p>
@@ -82,6 +88,9 @@ export default {
     ...mapGetters({
       user: "user",
     }),
+    regex() {
+      return /(.mov|.mp4|.wav|.MOV|.MP4|.WAV)/g;
+    },
   },
 };
 </script>
@@ -98,6 +107,7 @@ export default {
 
 .card-img {
   max-width: 100%;
+  max-height: 100%;
   display: block;
   margin: auto;
 }
