@@ -2,7 +2,7 @@
 
 An Evans-family-excusive photo-sharing social network.
 
-My family and I often send pictures to one another via WhatsApp groups and the like, so I wanted somewhere we could upload and store our highlights for posterity. I created Evanstagram (get it? We're the _Evans_ family and it's a site like _Instagram_. 🦗) to serve as a digitised, ever-lasting photo album. Plus, as we are spread out across two continents, I wanted to add another method to connect to one another -- particularly during the pandemic that has kept us apart from over a year.
+My family and I often send pictures to one another via WhatsApp groups and the like, so I wanted somewhere we could upload and store our highlights for posterity. I created Evanstagram (get it? We're the _Evans_ family and it's a site like _Instagram_. 🦗) to serve as a digitised, ever-lasting photo album. Plus, as we are spread out across two continents, I wanted to add another method to connect to one another -- particularly during the pandemic that has kept us apart for over a year.
 
 ### Features
 
