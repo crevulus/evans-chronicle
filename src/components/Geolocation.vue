@@ -20,11 +20,9 @@ export default {
     fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.address.latitude},${this.address.longitude}&key=${process.env.VUE_APP_GEOCODE_API_KEY}&result_type=locality`
     ).then((res) => {
-      res
-        .json()
-        .then(
-          (data) => (this.locationData = data.results[0].formatted_address)
-        );
+      res.json().then((data) => {
+        return (this.locationData = data.results[0].formatted_address);
+      });
     });
   },
 };

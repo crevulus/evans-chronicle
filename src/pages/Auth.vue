@@ -1,6 +1,6 @@
 <template>
   <div class="auth-container">
-    <h3>Evans Login</h3>
+    <h1>Evans Login</h1>
     <p>
       <strong>Forgot your password?</strong> Text me, I guess. This ain't
       Google.

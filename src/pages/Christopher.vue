@@ -3,7 +3,7 @@
     <Modal v-show="modalOpen" @close-modal="toggleModal" />
     <div :class="{ 'modal-overlay': modalOpen }">
       <div class="heading">
-        <h2 class="title">Christopher's Posts</h2>
+        <h1 class="title">Christopher's Posts</h1>
         <button
           v-show="user.loggedIn && user.data.email === userEmail"
           @click="newPostButton"
@@ -27,6 +27,7 @@
         />
         <input
           type="file"
+          aria-label="File Upload"
           @change="handleImageChange"
           :value="null"
           class="choose-file"
